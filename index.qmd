@@ -1,6 +1,6 @@
 ---
-title: "Writing a great story for data science projects - Fall 2025 "
-subtitle: "This is a Report Template Quarto"
+title: "Applying K-Means Clustering in retail industry - Fall 2025 "
+
 author: "Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
@@ -274,29 +274,6 @@ ggplot(customer_sales, aes(x = TotalSpent)) +
 
 ```
 
-```{python}
-import pandas as pd
-```
-
-```{r, warning=FALSE, echo=TRUE}
-# Load Data
-kable(head(murders))
-
-ggplot1 = murders %>% ggplot(mapping = aes(x=population/10^6, y=total)) 
-
-  ggplot1 + geom_point(aes(col=region), size = 4) +
-  geom_text_repel(aes(label=abb)) +
-  scale_x_log10() +
-  scale_y_log10() +
-  geom_smooth(formula = "y~x", method=lm,se = F)+
-  xlab("Populations in millions (log10 scale)") + 
-  ylab("Total number of murders (log10 scale)") +
-  ggtitle("US Gun Murders in 2010") +
-  scale_color_discrete(name = "Region")+
-      theme_bw()
-  
-
-```
 
 ### Modeling and Results
 
