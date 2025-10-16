@@ -34,94 +34,74 @@ Nice report!
 
 ## Introduction
 
+In today's data-driven corporate environment, understanding customer
+behavior and effectively managing inventories are key to organizational
+success. With the increased availability of transactional, demographic,
+and behavioral data, data mining and clustering techniques—particularly
+K-Means clustering—have become critical decision-making tools in retail,
+logistics, and marketing. Recent studies emphasize that algorithm
+selection and data preprocessing directly affect the quality of insights
+derived from clustering (Prasetiya and Prayoga 2024).
 
-In today's data-driven corporate environment, understanding customer behavior and effectively managing inventories are key to organizational success. With the increased availability of transactional, demographic, and behavioral data, data mining and clustering techniques—particularly K-Means clustering—have become critical decision-making tools in retail, logistics, and marketing. Recent studies emphasize that algorithm selection and data preprocessing directly affect the quality of insights derived from clustering (Prasetiya and Prayoga 2024).
+K-Means clustering is a machine learning technique that divides data
+into distinct clusters based on similarities, allowing businesses to
+identify patterns that would not be visible using traditional analysis.
+Research has demonstrated that it can greatly enhance consumer
+segmentation, inventory forecasting, and marketing optimization across
+various industries. For example, a weighted K-Means model produced more
+meaningful and stable customer clusters compared to the standard model
+(Omol et al. 2024). Similarly, comparative work on the same dataset
+found that while more complex models can sometimes yield higher
+precision, K-Means remains valuable for its interpretability and speed
+in operational settings (Prasetiya and Prayoga 2024).
 
-K-Means clustering is a machine learning technique that divides data into distinct clusters based on similarities, allowing businesses to identify patterns that would not be visible using traditional analysis. Research has demonstrated that it can greatly enhance consumer segmentation, inventory forecasting, and marketing optimization across various industries. For example, a weighted K-Means model produced more meaningful and stable customer clusters compared to the standard model (Omol et al. 2024). Similarly, comparative work on the same dataset found that while more complex models can sometimes yield higher precision, K-Means remains valuable for its interpretability and speed in operational settings (Prasetiya and Prayoga 2024).
+In emerging markets, K-Means has also proven beneficial for small and
+resource-limited businesses. Clustering transactional and demographic
+data enables grocery stores to identify clear patterns of consumer
+purchasing behavior (Sitorus et al. 2023). Likewise, studies show that
+clustering supports targeted marketing, loyalty programs, and more
+efficient stock management (Bala 2012; Sitorus et al. 2023; Gunawan
+2022). Collectively, these works underscore that even small or localized
+retailers can leverage K-Means-based segmentation to align supply,
+demand, and promotional strategy.
 
-In emerging markets, K-Means has also proven beneficial for small and resource-limited businesses. Clustering transactional and demographic data enables grocery stores to identify clear patterns of consumer purchasing behavior (Sitorus et al. 2023). Likewise, studies show that clustering supports targeted marketing, loyalty programs, and more efficient stock management (Bala 2012; Sitorus et al. 2023; Gunawan 2022). Collectively, these works underscore that even small or localized retailers can leverage K-Means-based segmentation to align supply, demand, and promotional strategy.
-
-Beyond retail, advances in clustering algorithms—including weighted variants (Omol et al. 2024) as well as Global and MiniBatch K-Means—have improved computational efficiency and accuracy, reducing issues like random initialization and scalability on large datasets. These enhancements make K-Means increasingly suitable for real-time analytics and modern business intelligence frameworks.
-In summary, the literature shows that K-Means clustering is more than a statistical technique; it is a strategic enabler for data-informed decision-making. By uncovering relevant behavioral patterns in large datasets, firms can deepen customer understanding, optimize resource allocation, and forecast demand more accurately. Integrating K-Means into corporate analytics frameworks is thus a crucial step toward operational excellence and maintaining competitiveness in the digital economy.
-
-
+Beyond retail, advances in clustering algorithms—including weighted
+variants (Omol et al. 2024) as well as Global and MiniBatch K-Means—have
+improved computational efficiency and accuracy, reducing issues like
+random initialization and scalability on large datasets. These
+enhancements make K-Means increasingly suitable for real-time analytics
+and modern business intelligence frameworks. In summary, the literature
+shows that K-Means clustering is more than a statistical technique; it
+is a strategic enabler for data-informed decision-making. By uncovering
+relevant behavioral patterns in large datasets, firms can deepen
+customer understanding, optimize resource allocation, and forecast
+demand more accurately. Integrating K-Means into corporate analytics
+frameworks is thus a crucial step toward operational excellence and
+maintaining competitiveness in the digital economy.
 
 ## Literature
 
-
-
-Arun Pandian Madasamyraju:
-
-- Implementation of K-Means Clustering for Inventory Projection
-- Link: https://ijstm.inarah.co.id/index.php/ijstm/article/view/856
--This study used K-means clustering to improve inventory forecasting accuracy in a trading firm (Dapur Uniq), grouping items with similar demand trends. Using Orange Data Mining for analysis, the researchers discovered three product clusters—fast-, medium-, and slow-moving items—to assist the organization in balancing stock levels and minimizing shortages and overstock. K-means was successful for simplifying inventory choices, optimizing replenishment cycles, and increasing supply chain efficiency; nevertheless, more study with bigger datasets is recommended to increase model generalizability.
-
-- Enhancing Customer Segmentation: RFM Analysis and K-Means Clustering Implementation
-- Link:https://www.researchgate.net/publication/358285794_Analysis_of_RFM_Customer_Segmentation_Using_Clustering_Algorithms
-- This article investigated the use of Recency, Frequency, and Monetary (RFM) analysis in conjunction with K-means clustering to increase client segmentation and marketing customization. By preprocessing retail transaction data and using K-means to RFM ratings, the study classified customers as "Best Customers" or "Almost Lost." This connectivity made it possible to run targeted promotions and manage client relationships more efficiently. However, the study concluded that segmentation success is dependent on data quality and the accurate selection of the appropriate K value, and it suggested future research on dynamic, real-time segmentation algorithms for more flexibility.
-
-- The Global K-Means Algorithm (Likas, Vlassis, & Verbeek)
--PDF https://www.cs.uoi.gr/~arly/full/conferences/C53.pdf cs.uoi.gr
-- Likas et al. proposed the Global K-Means method as an incremental and deterministic enhancement over ordinary K-means to address its sensitivity to random initialization. This approach creates clusters one at a time from carefully selected beginning locations, assuring stability and consistency independent of original centroid choices. In benchmark datasets such as Iris and synthetic picture data, the technique produced decreased clustering error and improved resilience. The research demonstrated how global K-means provides a more consistent and precise clustering basis for applications such as picture segmentation and customer data analysis, which need repeatability and stability.
-
-- Analysis of Simple K-Means Clustering Algorithm (Kanungo et al.)
-- Kanungo and colleagues investigated the computational characteristics of the classic K-means method and suggested an improved filtering strategy that use kd-trees to increase performance and scalability. Their data-sensitive technique lowers superfluous distance computations while increasing convergence efficiency, especially when clusters are well-separated. Experimental findings on simulated and real datasets, including color quantization and picture compression, demonstrated that the updated approach achieves comparable accuracy while computing quicker. This makes K-means more suitable for large-scale data mining, segmentation, and compression applications requiring high processing efficiency.
-
-
-- Charan Gullipalli
-
-- Application of K-Means Clustering for Customer Segmentation in Grocery Stores in Kenya
-- https://ijstm.inarah.co.id/index.php/ijstm/article/view/1024
-- Omol, Onyangor, Mburu, and Abuonji (2024) used K-means clustering on Kenyan grocery store data to identify customer groups with similar purchase tendencies based on demographic and transactional factors. The findings suggested that clustering successfully identified relevant customer categories, which guided focused marketing, improved service design, and increased customer happiness. K-means assists retailers in transforming raw purchase data into actionable customer insights, allowing grocery stores to focus on high-value categories and tailor offers to boost loyalty and sales.
-
-- Digital Maturity Action Fields for SMEs in Developing Economies
-- https://www.researchgate.net/publication/372365772_DIGITAL_MATURITY_ACTION_FIELDS_FOR_SMEs_IN_DEVELOPING_ECONOMIES
-- Although not directly related to clustering, Omol, Mburu, and Abuonji's (2023) research explores how using digital technologies increases productivity and competitiveness in small and medium-sized firms (SMEs). K-means clustering can supplement these findings by evaluating digital adoption rates and categorizing SMEs based on technology preparedness, innovative capability, and workforce skill gaps. Such segmentation enables policymakers and managers to prioritize digital transformation plans and efficiently distribute resources across company clusters.
-
-- Recency, Frequency, Monetary Value, Clustering, and Internal and External Indices for Customer Segmentation from Retail Data
-- https://www.mdpi.com/1999-4893/16/9/396
-- Wilbert (2023) used Recency-Frequency-Monetary (RFM) analysis together with K-means, K-medoids, and MiniBatch K-means clustering to discover six separate client categories, including loyal, lost, and best customers. K-means gave the most stable segmentation and assisted merchants in understanding purchase recency and spending value patterns, hence enabling tailored marketing and retention strategies. This demonstrates how K-means simplifies large-scale RFM data while identifying high-value clients for targeted interaction.
-
-- Improving Inventory Performance with Clustering-Based Demand Forecasts
-- https://www.researchgate.net/publication/261023207_Decision_tree_based_demand_forecasts_for_improving_inventory_performance
-- Bala (2012) showed that clustering-based forecasting improves supply chain efficiency by grouping comparable demand trends across SKUs. The study found that using K-means in inventory models enhanced demand forecasting accuracy, lowered holding costs, and raised service levels when compared to traditional techniques. K-means is therefore useful for retailers and manufacturers looking to incorporate consumer segmentation into predictive models for more efficient inventory control and replenishment choices.
-
-- Comparative Analysis of Store Clustering Techniques in the Retail Industry
-- https://www.scitepress.org/Papers/2019/79175/79175.pdf
-- Agarwal, Jain, and Rajnayak (2019) compared clustering methods—including hierarchical, density-based, and K-means—to analyze store-level performance and customer behavior. Their findings suggested that K-means efficiently unites retail outlets with comparable sales trends, allowing for more informed pricing, layout, and merchandising decisions. K-means assists managers in optimising product assortments, resource allocation, and regional marketing campaigns by identifying store-level trends.
-
-- A Purchase-Based Market Segmentation Methodology
-- https://www.sciencedirect.com/science/article/abs/pii/S0957417404000132
-- Tsai and Chiu (2004) suggested a customer segmentation model based on purchasing behavior, using data-mining and clustering techniques such as K-means to group customers with similar purchase habits. Their method allowed businesses to create focused marketing programs and tailored product offers for each category. This study demonstrates how K-means transforms transactional data into strategic insights, allowing firms to build data-driven promotions and increase customer lifetime value.
- 
- 
- 
-- Lavanya Guntupalli:
-
-- Applying K-Means Clustering for User Profiling in Retail (Department Store Case Study)
-- https://www.ijarsct.co.in/Paper19084.pdf
-- This study used K-means clustering on retail transaction and demographic data to group customers based on their expenditure and visit frequency. It discovered various consumer segments, such as regular high-spenders and occasional low-spenders, allowing the business to tailor marketing efforts, loyalty programs, and product suggestions. K-means was effective because it revealed hidden trends in massive datasets, allowing managers to focus promotions, optimise inventory for each section, and enhance retention techniques.
-
-- Application of K-Means for Customer Segmentation in Grocery Stores (Kenya)
-- https://ijstm.inarah.co.id/index.php/ijstm/article/view/1024
-- This study employed K-means clustering to examine supermarket transaction data, categorizing customers based on demographics, buy frequency, and spending habits. The findings identified distinct groupings, such as high-spending young individuals and low-spending senior clients. The study found that K-means assists grocery stores in tailoring promotions, managing inventory more effectively, and identifying lucrative consumer segments for loyalty schemes, eventually enhancing customer happiness and profit margins.
-
-- Used Car Customer Segmentation Using K-Means (Caroline.id Case Study)
-- https://www.researchgate.net/publication/379443160_Used_Car_Customer_Segmentation_Using_K-Means_Clustering_Model_With_SPSS_Program_Case_Study_CarolineId
-- In this case study, used-vehicle sales data were clustered using K-means to determine buyer characteristics based on age, gender, desired car type, and payment method. The technique identified two major purchasing groups, namely millennial men aged 31 to 40 who preferred automatic vehicles. K-means assisted the organization in developing targeted advertising, adjusting inventory mix, and personalizing sales methods, proving useful for businesses seeking data-driven marketing and increased consumer interaction.
-
-- Dynamic Pricing and Inventory Control for Multiple Products (Ríos & Vera 2023)
-- https://www.sciencedirect.com/science/article/abs/pii/S036083522300089X
-- Although this research focuses on dynamic pricing and inventory optimization, K-means clustering may be used to improve the framework by categorizing items or consumers based on demand patterns, price sensitivity, and purchase frequency. By categorizing comparable demand habits, merchants may use personalized pricing tactics, better inventory planning, and more precisely estimate sales. This combination of K-means and optimization approaches enables more informed decision-making and improved resource allocation in retail operations.
-
-- Systematic Literature Review: Customer Segmentation in Retail (2019–2024)
-- https://journal-iam.com/index.php/technovasia/article/view/11
-- This systematic evaluation examined recent customer segmentation approaches and identified K-means as one of the most successful tools for grouping retail consumers using Recency-Frequency-Monetary (RFM) characteristics. The research highlights integrating K-means with association-rule mining (e.g., FP-Growth) to identify not just consumer groups but also their product preferences. It demonstrates how K-means may assist marketing teams give targeted promotions, anticipate purchase habits, and create cluster-specific loyalty programs.
-
-- Implementation of K-Means Clustering for Inventory Projection (Retail Glassware Industry)
-- https://www.researchgate.net/publication/381040426_Implementation_of_K-Means_Clustering_for_Inventory_Projection
-- K-means were employed in this study to cluster products based on demand volume and fluctuation, categorizing them as fast-, medium-, or slow-moving. The technique simplified inventory management by assisting managers in forecasting restocking requirements and avoiding overstock or shortage issues. The article revealed that K-means is a useful tool for data-driven inventory planning, increasing operational efficiency, and promoting lean retail management.
-
+The studied literature stresses the importance of K-Means clustering in
+retail operations, consumer segmentation, and inventory management.
+According to studies, K-Means efficiently organizes items and consumers
+based on demand patterns, purchasing behavior, and demographic
+information, helping businesses to improve their decision-making and
+marketing tactics. For example, employing RFM (Recency, Frequency, and
+Monetary) analysis in conjunction with K-Means has allowed businesses to
+identify high-value clients and adjust promotions appropriately. Other
+studies, such as Bala (2012) and Agarwal et al. (2019), have shown that
+clustering improves inventory forecasting, optimizes product
+assortments, and promotes lean supply chain management. Advanced
+variants, such as Global K-Means and MiniBatch K-Means, have been
+developed to overcome issues such as random initialization and
+processing efficiency, as stated by Likas et al. and Kanungo et al.
+Furthermore, applications in a variety of settings—from Kenyan grocery
+shops to used vehicle markets—show K-Means' versatility for spotting
+purchase tendencies, increasing loyalty, and driving targeted marketing.
+According to the literature, K-Means is a practical and interpretable
+technique for translating raw retail data into actionable insights,
+enabling dynamic pricing, tailored marketing, and enhanced inventory
+control in today's data-driven retail environment.
 
 ## Methods
 
@@ -152,30 +132,40 @@ $$
 
 ## Analysis and Results
 
-### Data Exploration and Visualization
+# Data Exploration and Visualization
 
-# Data sources and collection.
-- Daqing Chen gave the Online Retail dataset to the UCI Machine Learning Repository in 2015. It covers every transaction made by a UK-based online retailer of distinctive gift products between December 2010 and December 2011. The business mostly caters to wholesale clients. The information was taken straight from the business's sales records.
+-   Data sources and collection.
 
+-   Daqing Chen gave the Online Retail dataset to the UCI Machine
+    Learning Repository in 2015. It covers every transaction made by a
+    UK-based online retailer of distinctive gift products between
+    December 2010 and December 2011. The business mostly caters to
+    wholesale clients. The information was taken straight from the
+    business's sales records.
 
-
-# Initial findings and insights through visualizations.
+-   Initial findings and insights through visualizations.
 
 -   Following data cleansing and visualization:
+
 -   The majority of transactions take place in the United Kingdom.
--   Holidays are usually when sales are at their highest, particularly in November and December.
+
+-   Holidays are usually when sales are at their highest, particularly
+    in November and December.
+
 -   Order cancellations are indicated by invoices that begin with "C."
--   Some transactions have prices or quantities that are zero or negative, which could be a sign of refunds or data input problems.
 
+-   Some transactions have prices or quantities that are zero or
+    negative, which could be a sign of refunds or data input problems.
 
+-   Unexpected patterns or anomalies.
 
-##  Unexpected patterns or anomalies.
+-   Some clients—likely wholesalers—make extremely expensive bulk
+    purchases.
 
-- Some clients—likely wholesalers—make extremely expensive bulk purchases.
-- In certain instances, there are duplicate or missing client IDs.
-- Order cancellations for some products are common, which may indicate stock or delivery problems.
+-   In certain instances, there are duplicate or missing client IDs.
 
-
+-   Order cancellations for some products are common, which may indicate
+    stock or delivery problems.
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
@@ -274,7 +264,6 @@ ggplot(customer_sales, aes(x = TotalSpent)) +
 
 ```
 
-
 ### Modeling and Results
 
 -   Explain your data preprocessing and cleaning steps.
@@ -296,3 +285,33 @@ ggplot(customer_sales, aes(x = TotalSpent)) +
 -   Discuss the implications of your results.
 
 ## References
+
+https://ijstm.inarah.co.id/index.php/ijstm/article/view/856
+
+https://www.researchgate.net/publication/358285794_Analysis_of_RFM_Customer_Segmentation_Using_Clustering_Algorithms
+
+https://www.cs.uoi.gr/\~arly/full/conferences/C53.pdf cs.uoi.gr
+
+https://ijstm.inarah.co.id/index.php/ijstm/article/view/1024
+
+https://www.researchgate.net/publication/372365772_DIGITAL_MATURITY_ACTION_FIELDS_FOR_SMEs_IN_DEVELOPING_ECONOMIES
+
+https://www.mdpi.com/1999-4893/16/9/396
+
+https://www.researchgate.net/publication/261023207_Decision_tree_based_demand_forecasts_for_improving_inventory_performance
+
+https://www.scitepress.org/Papers/2019/79175/79175.pdf
+
+https://www.sciencedirect.com/science/article/abs/pii/S0957417404000132
+
+https://www.ijarsct.co.in/Paper19084.pdf
+
+https://ijstm.inarah.co.id/index.php/ijstm/article/view/1024
+
+https://www.researchgate.net/publication/379443160_Used_Car_Customer_Segmentation_Using_K-Means_Clustering_Model_With_SPSS_Program_Case_Study_CarolineId
+
+https://www.sciencedirect.com/science/article/abs/pii/S036083522300089X
+
+https://journal-iam.com/index.php/technovasia/article/view/11
+
+https://www.researchgate.net/publication/381040426_Implementation_of_K-Means_Clustering_for_Inventory_Projection
