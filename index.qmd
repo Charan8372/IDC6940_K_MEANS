@@ -34,6 +34,8 @@ Nice report!
 
 ## Introduction
 
+## 1. Introduction
+
 In today's data-driven corporate environment, understanding customer
 behavior and effectively managing inventories are key to organizational
 success. With the increased availability of transactional, demographic,
@@ -41,7 +43,7 @@ and behavioral data, data mining and clustering techniques—particularly
 K-Means clustering—have become critical decision-making tools in retail,
 logistics, and marketing. Recent studies emphasize that algorithm
 selection and data preprocessing directly affect the quality of insights
-derived from clustering (Prasetiya and Prayoga 2024).
+derived from clustering (@prasetiya2025review).
 
 K-Means clustering is a machine learning technique that divides data
 into distinct clusters based on similarities, allowing businesses to
@@ -50,23 +52,23 @@ Research has demonstrated that it can greatly enhance consumer
 segmentation, inventory forecasting, and marketing optimization across
 various industries. For example, a weighted K-Means model produced more
 meaningful and stable customer clusters compared to the standard model
-(Omol et al. 2024). Similarly, comparative work on the same dataset
-found that while more complex models can sometimes yield higher
-precision, K-Means remains valuable for its interpretability and speed
-in operational settings (Prasetiya and Prayoga 2024).
+(@omol2024kenya). Similarly, comparative work on the same dataset found
+that while more complex models can sometimes yield higher precision,
+K-Means remains valuable for its interpretability and speed in
+operational settings (@prasetiya2025review).
 
 In emerging markets, K-Means has also proven beneficial for small and
 resource-limited businesses. Clustering transactional and demographic
 data enables grocery stores to identify clear patterns of consumer
-purchasing behavior (Sitorus et al. 2023). Likewise, studies show that
+purchasing behavior (@sitorus2023inventory). Likewise, studies show that
 clustering supports targeted marketing, loyalty programs, and more
-efficient stock management (Bala 2012; Sitorus et al. 2023; Gunawan
-2022). Collectively, these works underscore that even small or localized
-retailers can leverage K-Means-based segmentation to align supply,
-demand, and promotional strategy.
+efficient stock management (@bala2012forecast). Collectively, these
+works underscore that even small or localized retailers can leverage
+K-Means-based segmentation to align supply, demand, and promotional
+strategy.
 
 Beyond retail, advances in clustering algorithms—including weighted
-variants (Omol et al. 2024) as well as Global and MiniBatch K-Means—have
+variants (@omol2024kenya) as well as Global and MiniBatch K-Means—have
 improved computational efficiency and accuracy, reducing issues like
 random initialization and scalability on large datasets. These
 enhancements make K-Means increasingly suitable for real-time analytics
@@ -79,93 +81,98 @@ demand more accurately. Integrating K-Means into corporate analytics
 frameworks is thus a crucial step toward operational excellence and
 maintaining competitiveness in the digital economy.
 
-## Literature
+## 2. Literature Review
 
-The studied literature stresses the importance of K-Means clustering in
-retail operations, consumer segmentation, and inventory management.
-According to studies, K-Means efficiently organizes items and consumers
-based on demand patterns, purchasing behavior, and demographic
-information, helping businesses to improve their decision-making and
-marketing tactics. For example, employing RFM (Recency, Frequency, and
-Monetary) analysis in conjunction with K-Means has allowed businesses to
-identify high-value clients and adjust promotions appropriately. Other
-studies, such as Bala (2012) and Agarwal et al. (2019), have shown that
-clustering improves inventory forecasting, optimizes product
-assortments, and promotes lean supply chain management. Advanced
-variants, such as Global K-Means and MiniBatch K-Means, have been
-developed to overcome issues such as random initialization and
-processing efficiency, as stated by Likas et al. and Kanungo et al.
-Furthermore, applications in a variety of settings—from Kenyan grocery
-shops to used vehicle markets—show K-Means' versatility for spotting
-purchase tendencies, increasing loyalty, and driving targeted marketing.
-According to the literature, K-Means is a practical and interpretable
-technique for translating raw retail data into actionable insights,
-enabling dynamic pricing, tailored marketing, and enhanced inventory
-control in today's data-driven retail environment.
+Research shows that K-Means clustering is widely used in retail to
+improve customer segmentation and inventory forecasting. According to
+@prasetiya2025review, studies between 2019–2024 identified that
+combining K-Means with association rule learning (like FP-Growth) helps
+retailers better understand customer behavior and create focused
+marketing campaigns. The review also highlights that K-Means performs
+reliably on large datasets and can be applied to classify products by
+sales speed — such as fast-moving and slow-moving goods.
+
+@omol2024kenya applied K-Means clustering to grocery stores in Kenya
+using transactional and demographic data. Their study showed that age
+and income strongly influence shopping behavior. Retailers could use
+this information to manage inventory and target marketing efforts more
+effectively.
+
+@bala2012forecast introduced a forecasting model combining clustering
+and demand prediction. This approach improved inventory accuracy,
+reduced excess stock, and minimized shortages — showing that clustering
+can make supply chains leaner and more efficient. Similarly,
+@sitorus2023inventory used K-Means to group products by demand at a
+retail store and identified three categories: fast, moderate, and slow
+sellers. This helped optimize stock levels and reduce costs.
+
+Together, these studies demonstrate that K-Means clustering helps
+retailers improve both marketing precision and inventory control by
+identifying customer patterns and linking them to product demand. For
+example, clustering results can be used to align promotional strategies
+with inventory decisions, creating an integrated, data-driven retail
+management system (@prasetiya2025review; @omol2024kenya;
+@bala2012forecast; @sitorus2023inventory).
 
 ## Methods
 
--   Detail the models or algorithms used.
+Descriptive analytics and data visualization methods in R Studio were
+used to investigate the dataset. Renaming columns, dealing with missing
+values, and making sure numerical and categorical variables were
+consistent were all part of data cleansing.
 
--   Justify your choices based on the problem and data.
+To find patterns, seasonal trends, and correlations between variables
+like sales, suppliers, and item kinds, exploratory data analysis (EDA)
+was used. Sales distributions, monthly trends, and category comparisons
+were represented through the use of ggplot2 visualization techniques.
 
-*The common non-parametric regression model is*
-$Y_i = m(X_i) + \varepsilon_i$*, where* $Y_i$ *can be defined as the sum
-of the regression function value* $m(x)$ *for* $X_i$*. Here* $m(x)$ *is
-unknown and* $\varepsilon_i$ *some errors. With the help of this
-definition, we can create the estimation for local averaging i.e.*
-$m(x)$ *can be estimated with the product of* $Y_i$ *average and* $X_i$
-*is near to* $x$*. In other words, this means that we are discovering
-the line through the data points with the help of surrounding data
-points. The estimation formula is printed below [@R-base]:*
-
-$$
-M_n(x) = \sum_{i=1}^{n} W_n (X_i) Y_i  \tag{1}
-$$$W_n(x)$ *is the sum of weights that belongs to all real numbers.
-Weights are positive numbers and small if* $X_i$ *is far from* $x$*.*
-
-*Another equation:*
-
-$$
-y_i = \beta_0 + \beta_1 X_1 +\varepsilon_i
-$$
+Since understanding sales behavior rather than making predictions was
+the primary objective, neither predictive nor machine learning models
+were used. Because they make it possible to clearly identify important
+trends, supplier performance, and sales anomalies within the dataset,
+the selected approaches are appropriate.
 
 ## Analysis and Results
 
 # Data Exploration and Visualization
 
--   Data sources and collection.
+R Studio was used to clean and visualize the data. Monthly trends,
+supplier performance, and product categories were the main subjects of
+the analysis.
 
--   Daqing Chen gave the Online Retail dataset to the UCI Machine
-    Learning Repository in 2015. It covers every transaction made by a
-    UK-based online retailer of distinctive gift products between
-    December 2010 and December 2011. The business mostly caters to
-    wholesale clients. The information was taken straight from the
-    business's sales records.
+The holidays are when sales are at their highest, according to the
+visuals, and a select group of suppliers generate the greatest income.
+The best-selling products were wine and spirits, and warehouse sales
+were typically higher than retail sales.
 
--   Initial findings and insights through visualizations.
+These trends demonstrate the dataset's substantial provider dominance
+and seasonal demand.
 
--   Following data cleansing and visualization:
+Data Sources and Collection:
 
--   The majority of transactions take place in the United Kingdom.
+The Department of Liquor Control's Montgomery County, Maryland Open Data
+Portal provided the data. Monthly retail, transfer, and warehouse sales
+records by supplier and item type are included; these records are
+updated on a regular basis and made publicly accessible under a Public
+Domain License.
 
--   Holidays are usually when sales are at their highest, particularly
-    in November and December.
+Initial Findings and Insights:
 
--   Order cancellations are indicated by invoices that begin with "C."
+Holiday seasons are when sales are at their highest.
 
--   Some transactions have prices or quantities that are zero or
-    negative, which could be a sign of refunds or data input problems.
+Overall sales are dominated by a small number of vendors.
 
--   Unexpected patterns or anomalies.
+Wine and spirits are the most popular product categories.
 
--   Some clients—likely wholesalers—make extremely expensive bulk
-    purchases.
+Sales in warehouses are higher than those in stores.
 
--   In certain instances, there are duplicate or missing client IDs.
+Unexpected Patterns or Anomalies:
 
--   Order cancellations for some products are common, which may indicate
-    stock or delivery problems.
+There are also duplicate item codes and missing supplier names.
+
+certain months with sales figures that are abnormally high or low.
+
+Retail transfer increases are probably related to restocking occasions.
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
@@ -176,91 +183,122 @@ library(ggrepel)
 library(dslabs)
 
 
-
+# Load libraries
 library(readxl)
 library(dplyr)
 library(ggplot2)
 library(lubridate)
+library(scales)
+
+# Read Excel file (update the file path if needed)
+
+data <- read_excel("Retail_Sales.xlsx")
+
+# View basic structure
+glimpse(data)
+summary(data)
 
 
 
-df <- read_excel("Online Retail.xlsx")
 
+# Remove duplicate rows
+data <- distinct(data)
 
-
-glimpse(df)
-
-# Clean data
-
-df_clean <- df %>%
-  filter(!is.na(Description), !is.na(CustomerID)) %>%     # Remove missing Description/CustomerID
-  filter(Quantity > 0, UnitPrice > 0) %>%                 # Remove invalid sales
+# Handle missing values (replace or remove)
+data <- data %>%
   mutate(
-    InvoiceDate = as.POSIXct(InvoiceDate),
-    TotalAmount = Quantity * UnitPrice,                   # Create TotalAmount column
-    Month = floor_date(InvoiceDate, "month")              # Create Month column
+    SUPPLIER = ifelse(is.na(SUPPLIER), "Unknown Supplier", SUPPLIER),
+    `ITEM TYPE` = ifelse(is.na(`ITEM TYPE`), "Unknown Type", `ITEM TYPE`),
+    `RETAIL SALES` = ifelse(is.na(`RETAIL SALES`), 0, `RETAIL SALES`),
+    `RETAIL TRANSFERS` = ifelse(is.na(`RETAIL TRANSFERS`), 0, `RETAIL TRANSFERS`),
+    `WAREHOUSE SALES` = ifelse(is.na(`WAREHOUSE SALES`), 0, `WAREHOUSE SALES`)
   )
+
+# Create a Total Sales column
+data <- data %>%
+  mutate(TOTAL_SALES = `RETAIL SALES` + `RETAIL TRANSFERS` + `WAREHOUSE SALES`)
+
+# Combine YEAR and MONTH into a proper Date column
+data <- data %>%
+  mutate(Date = make_date(YEAR, MONTH, 1))
+
 ```
 
 ```{r}
-#Top-selling products
+# Total Sales Trend Over Time
 
-top_products <- df_clean %>%
-  group_by(Description) %>%
-  summarise(TotalSales = sum(TotalAmount, na.rm = TRUE)) %>%
-  arrange(desc(TotalSales)) %>%
+ggplot(data, aes(x = Date, y = TOTAL_SALES)) +
+  geom_line(color = "steelblue", linewidth = 1) +
+  labs(title = "Total Sales Trend Over Time", x = "Date", y = "Total Sales") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal()
+
+```
+
+```{r}
+# Top 10 Suppliers by Total Sales
+
+top_suppliers <- data %>%
+  group_by(SUPPLIER) %>%
+  summarise(Total_Sales = sum(TOTAL_SALES, na.rm = TRUE)) %>%
+  arrange(desc(Total_Sales)) %>%
   head(10)
 
-ggplot(top_products, aes(x = reorder(Description, TotalSales), y = TotalSales)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
+ggplot(top_suppliers, aes(x = reorder(SUPPLIER, Total_Sales), y = Total_Sales, fill = SUPPLIER)) +
+  geom_bar(stat = "identity") +
   coord_flip() +
-  labs(title = "Top 10 Selling Products", x = "Product", y = "Total Sales")
+  labs(title = "Top 10 Suppliers by Total Sales", x = "Supplier", y = "Total Sales") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "none")
 
 ```
 
 ```{r}
-# Monthly sales trend
+# Sales by Item Type
 
-df_clean <- df_clean %>%
-  mutate(Month = format(InvoiceDate, "%Y-%m"))
-
-monthly_sales <- df_clean %>%
-  group_by(Month) %>%
-  summarise(TotalRevenue = sum(TotalAmount))
-
-ggplot(monthly_sales, aes(x = Month, y = TotalRevenue, group = 1)) +
-  geom_line(color = "darkgreen") +
-  geom_point() +
-  labs(title = "Monthly Sales Trend", x = "Month", y = "Revenue") +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
-
-```{r}
-# Top countries by revenue
-
-top_countries <- df_clean %>%
-  group_by(Country) %>%
-  summarise(TotalRevenue = sum(TotalAmount)) %>%
-  arrange(desc(TotalRevenue)) %>%
-  head(10)
-
-ggplot(top_countries, aes(x = reorder(Country, TotalRevenue), y = TotalRevenue)) +
-  geom_bar(stat = "identity", fill = "tomato") +
-  coord_flip() +
-  labs(title = "Top 10 Countries by Revenue", x = "Country", y = "Revenue")
+ggplot(data, aes(x = `ITEM TYPE`, y = TOTAL_SALES, fill = `ITEM TYPE`)) +
+  geom_bar(stat = "summary", fun = "sum") +
+  labs(title = "Total Sales by Item Type", x = "Item Type", y = "Total Sales") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "none")
 
 ```
 
 ```{r}
-# Customer purchase distribution
+# Comparison: Retail vs Warehouse Sales
 
-customer_sales <- df_clean %>%
-  group_by(CustomerID) %>%
-  summarise(TotalSpent = sum(TotalAmount))
+sales_compare <- data %>%
+  summarise(
+    Retail_Sales = sum(`RETAIL SALES`, na.rm = TRUE),
+    Warehouse_Sales = sum(`WAREHOUSE SALES`, na.rm = TRUE)
+  ) %>%
+  tidyr::pivot_longer(cols = everything(), names_to = "Category", values_to = "Sales")
 
-ggplot(customer_sales, aes(x = TotalSpent)) +
-  geom_histogram(bins = 30, fill = "purple", color = "white") +
-  labs(title = "Distribution of Customer Spending", x = "Total Spent", y = "Count")
+ggplot(sales_compare, aes(x = Category, y = Sales, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Retail vs Warehouse Sales", x = "", y = "Sales") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+```
+
+```{r}
+
+# Monthly Sales Heatmap
+library(viridis)
+
+monthly_sales <- data %>%
+  group_by(YEAR, MONTH) %>%
+  summarise(Total_Sales = sum(TOTAL_SALES, na.rm = TRUE))
+
+ggplot(monthly_sales, aes(x = factor(MONTH), y = factor(YEAR), fill = Total_Sales)) +
+  geom_tile() +
+  scale_fill_viridis(option = "magma", direction = -1, labels = comma) +
+  labs(title = "Monthly Sales Heatmap", x = "Month", y = "Year", fill = "Total Sales") +
+  theme_minimal()
 
 ```
 
@@ -284,34 +322,3 @@ ggplot(customer_sales, aes(x = TotalSpent)) +
 
 -   Discuss the implications of your results.
 
-## References
-
-https://ijstm.inarah.co.id/index.php/ijstm/article/view/856
-
-https://www.researchgate.net/publication/358285794_Analysis_of_RFM_Customer_Segmentation_Using_Clustering_Algorithms
-
-https://www.cs.uoi.gr/\~arly/full/conferences/C53.pdf cs.uoi.gr
-
-https://ijstm.inarah.co.id/index.php/ijstm/article/view/1024
-
-https://www.researchgate.net/publication/372365772_DIGITAL_MATURITY_ACTION_FIELDS_FOR_SMEs_IN_DEVELOPING_ECONOMIES
-
-https://www.mdpi.com/1999-4893/16/9/396
-
-https://www.researchgate.net/publication/261023207_Decision_tree_based_demand_forecasts_for_improving_inventory_performance
-
-https://www.scitepress.org/Papers/2019/79175/79175.pdf
-
-https://www.sciencedirect.com/science/article/abs/pii/S0957417404000132
-
-https://www.ijarsct.co.in/Paper19084.pdf
-
-https://ijstm.inarah.co.id/index.php/ijstm/article/view/1024
-
-https://www.researchgate.net/publication/379443160_Used_Car_Customer_Segmentation_Using_K-Means_Clustering_Model_With_SPSS_Program_Case_Study_CarolineId
-
-https://www.sciencedirect.com/science/article/abs/pii/S036083522300089X
-
-https://journal-iam.com/index.php/technovasia/article/view/11
-
-https://www.researchgate.net/publication/381040426_Implementation_of_K-Means_Clustering_for_Inventory_Projection
