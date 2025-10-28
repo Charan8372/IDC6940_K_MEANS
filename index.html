@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)">
-<meta name="dcterms.date" content="2025-10-20">
+<meta name="dcterms.date" content="2025-10-27">
 
 <title>Applying K-Means Clustering in retail industry - Fall 2025</title>
 <style>
@@ -3123,7 +3123,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 20, 2025</p>
+      <p class="date">October 27, 2025</p>
     </div>
   </div>
   
@@ -3170,9 +3170,17 @@ Important
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>Descriptive analytics and data visualization methods in R Studio were used to investigate the dataset. Renaming columns, dealing with missing values, and making sure numerical and categorical variables were consistent were all part of data cleansing.</p>
-<p>To find patterns, seasonal trends, and correlations between variables like sales, suppliers, and item kinds, exploratory data analysis (EDA) was used. Sales distributions, monthly trends, and category comparisons were represented through the use of ggplot2 visualization techniques.</p>
-<p>Since understanding sales behavior rather than making predictions was the primary objective, neither predictive nor machine learning models were used. Because they make it possible to clearly identify important trends, supplier performance, and sales anomalies within the dataset, the selected approaches are appropriate.</p>
+<p>In this project, customers are grouped according to their purchase habits in the retail dataset using the K-Means clustering technique. Finding market niches like big spenders, infrequent consumers, and frequent buyers is the goal.</p>
+<p>Prior to modeling, duplicates were eliminated, missing values were handled, and new fields like total amount (Quantity × Unit Price) were created. After then, the data was standardized so that every variable could be compared.</p>
+<p>Customer behavior was represented using the RFM model (Recency, Frequency, Monetary). The K-Means algorithm was fed these three characteristics, and it operates by:</p>
+<ul>
+<li><p>selecting K cluster centers at random.</p></li>
+<li><p>Euclidean distance is used to assign each data point to the closest center.</p></li>
+<li><p>utilizing the mean of the allotted points to update the centers.</p></li>
+<li><p>Continue until the centers stop shifting.</p></li>
+</ul>
+<p>The optimal number of clusters (K) was determined using the Elbow method and Silhouette score.</p>
+<p>Because K-Means is effective, simple to understand, and appropriate for large-scale retail data, it was chosen. The findings aid in comprehending various client categories for focused marketing tactics.</p>
 </section>
 <section id="analysis-and-results" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-and-results">Analysis and Results</h2>
@@ -3183,16 +3191,22 @@ Important
 <p>The holidays are when sales are at their highest, according to the visuals, and a select group of suppliers generate the greatest income. The best-selling products were wine and spirits, and warehouse sales were typically higher than retail sales.</p>
 <p>These trends demonstrate the dataset’s substantial provider dominance and seasonal demand.</p>
 <p>Data Sources and Collection:</p>
-<p>The Department of Liquor Control’s Montgomery County, Maryland Open Data Portal provided the data. Monthly retail, transfer, and warehouse sales records by supplier and item type are included; these records are updated on a regular basis and made publicly accessible under a Public Domain License.</p>
+<ul>
+<li>The Department of Liquor Control’s Montgomery County, Maryland Open Data Portal provided the data. Monthly retail, transfer, and warehouse sales records by supplier and item type are included; these records are updated on a regular basis and made publicly accessible under a Public Domain License.</li>
+</ul>
 <p>Initial Findings and Insights:</p>
-<p>Holiday seasons are when sales are at their highest.</p>
-<p>Overall sales are dominated by a small number of vendors.</p>
-<p>Wine and spirits are the most popular product categories.</p>
-<p>Sales in warehouses are higher than those in stores.</p>
+<ul>
+<li><p>Holiday seasons are when sales are at their highest.</p></li>
+<li><p>Overall sales are dominated by a small number of vendors.</p></li>
+<li><p>Wine and spirits are the most popular product categories.</p></li>
+<li><p>Sales in warehouses are higher than those in stores.</p></li>
+</ul>
 <p>Unexpected Patterns or Anomalies:</p>
-<p>There are also duplicate item codes and missing supplier names.</p>
-<p>certain months with sales figures that are abnormally high or low.</p>
-<p>Retail transfer increases are probably related to restocking occasions.</p>
+<ul>
+<li><p>There are also duplicate item codes and missing supplier names.</p></li>
+<li><p>certain months with sales figures that are abnormally high or low.</p></li>
+<li><p>Retail transfer increases are probably related to restocking occasions.</p></li>
+</ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>

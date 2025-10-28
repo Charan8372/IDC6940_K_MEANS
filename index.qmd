@@ -116,21 +116,35 @@ management system (@prasetiya2025review; @omol2024kenya;
 
 ## Methods
 
-Descriptive analytics and data visualization methods in R Studio were
-used to investigate the dataset. Renaming columns, dealing with missing
-values, and making sure numerical and categorical variables were
-consistent were all part of data cleansing.
+In this project, customers are grouped according to their purchase
+habits in the retail dataset using the K-Means clustering technique.
+Finding market niches like big spenders, infrequent consumers, and
+frequent buyers is the goal.
 
-To find patterns, seasonal trends, and correlations between variables
-like sales, suppliers, and item kinds, exploratory data analysis (EDA)
-was used. Sales distributions, monthly trends, and category comparisons
-were represented through the use of ggplot2 visualization techniques.
+Prior to modeling, duplicates were eliminated, missing values were
+handled, and new fields like total amount (Quantity × Unit Price) were
+created. After then, the data was standardized so that every variable
+could be compared.
 
-Since understanding sales behavior rather than making predictions was
-the primary objective, neither predictive nor machine learning models
-were used. Because they make it possible to clearly identify important
-trends, supplier performance, and sales anomalies within the dataset,
-the selected approaches are appropriate.
+Customer behavior was represented using the RFM model (Recency,
+Frequency, Monetary). The K-Means algorithm was fed these three
+characteristics, and it operates by:
+
+-   selecting K cluster centers at random.
+
+-   Euclidean distance is used to assign each data point to the closest
+    center.
+
+-   utilizing the mean of the allotted points to update the centers.
+
+-   Continue until the centers stop shifting.
+
+The optimal number of clusters (K) was determined using the Elbow method
+and Silhouette score.
+
+Because K-Means is effective, simple to understand, and appropriate for
+large-scale retail data, it was chosen. The findings aid in
+comprehending various client categories for focused marketing tactics.
 
 ## Analysis and Results
 
@@ -150,29 +164,30 @@ and seasonal demand.
 
 Data Sources and Collection:
 
-The Department of Liquor Control's Montgomery County, Maryland Open Data
-Portal provided the data. Monthly retail, transfer, and warehouse sales
-records by supplier and item type are included; these records are
-updated on a regular basis and made publicly accessible under a Public
-Domain License.
+-   The Department of Liquor Control's Montgomery County, Maryland Open
+    Data Portal provided the data. Monthly retail, transfer, and
+    warehouse sales records by supplier and item type are included;
+    these records are updated on a regular basis and made publicly
+    accessible under a Public Domain License.
 
 Initial Findings and Insights:
 
-Holiday seasons are when sales are at their highest.
+-   Holiday seasons are when sales are at their highest.
 
-Overall sales are dominated by a small number of vendors.
+-   Overall sales are dominated by a small number of vendors.
 
-Wine and spirits are the most popular product categories.
+-   Wine and spirits are the most popular product categories.
 
-Sales in warehouses are higher than those in stores.
+-   Sales in warehouses are higher than those in stores.
 
 Unexpected Patterns or Anomalies:
 
-There are also duplicate item codes and missing supplier names.
+-   There are also duplicate item codes and missing supplier names.
 
-certain months with sales figures that are abnormally high or low.
+-   certain months with sales figures that are abnormally high or low.
 
-Retail transfer increases are probably related to restocking occasions.
+-   Retail transfer increases are probably related to restocking
+    occasions.
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
@@ -321,4 +336,3 @@ ggplot(monthly_sales, aes(x = factor(MONTH), y = factor(YEAR), fill = Total_Sale
 -   Summarize your key findings.
 
 -   Discuss the implications of your results.
-
