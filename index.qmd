@@ -1,11 +1,21 @@
 ---
-title: "Applying K-Means Clustering in retail industry - Fall 2025 "
+title: "Applying K-Means Clustering in retail industry"
 
 author: "Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
   html:
     code-fold: true
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-expand: true
+    toc-title: "Table of Contents"
+    toc-sidebar: true
+    number-sections: true
+    theme: flatly   
+    df-print: kable
+    fig-align: center
 course: Capstone Projects in Data Science
 bibliography: references.bib # file contains bibtex for references
 #always_allow_html: true # this allows to get PDF with HTML features
@@ -32,9 +42,7 @@ writing!
 Nice report!
 :::
 
-## Introduction
-
-## 1. Introduction
+# Introduction
 
 In today's data-driven corporate environment, understanding customer
 behavior and effectively managing inventories are key to organizational
@@ -81,7 +89,7 @@ demand more accurately. Integrating K-Means into corporate analytics
 frameworks is thus a crucial step toward operational excellence and
 maintaining competitiveness in the digital economy.
 
-## 2. Literature Review
+## Literature Review
 
 Research shows that K-Means clustering is widely used in retail to
 improve customer segmentation and inventory forecasting. According to
@@ -114,80 +122,148 @@ with inventory decisions, creating an integrated, data-driven retail
 management system (@prasetiya2025review; @omol2024kenya;
 @bala2012forecast; @sitorus2023inventory).
 
-## Methods
+# Methods
 
-In this project, customers are grouped according to their purchase
-habits in the retail dataset using the K-Means clustering technique.
-Finding market niches like big spenders, infrequent consumers, and
-frequent buyers is the goal.
+This project applies the K-Means clustering algorithm to identify sales
+and inventory patterns within the
+(@MontgomeryCountyWarehouseRetail2025). The data contain monthly sales
+information by supplier, item code, and item type, allowing segmentation
+of products and suppliers into categories such as fast-, medium-, and
+slow-moving items. The overall workflow involves data preprocessing,
+feature engineering, determination of the optimal number of clusters,
+application of the K-Means algorithm, and interpretation of cluster
+characteristics relevant to inventory management.
 
-Prior to modeling, duplicates were eliminated, missing values were
-handled, and new fields like total amount (Quantity × Unit Price) were
-created. After then, the data was standardized so that every variable
-could be compared.
+## Data Preparation
 
-Customer behavior was represented using the RFM model (Recency,
-Frequency, Monetary). The K-Means algorithm was fed these three
-characteristics, and it operates by:
+The dataset was obtained from (@MontgomeryCountyWarehouseRetail2025). It
+includes supplier names, item types, sales values, and dates (month,
+year).
 
--   selecting K cluster centers at random.
+Steps taken before analysis included:
 
--   Euclidean distance is used to assign each data point to the closest
-    center.
+-   **Cleaning:** Replacing missing supplier or item types with
+    “Unknown” and filling null sales values with zero.
 
--   utilizing the mean of the allotted points to update the centers.
+-   **Feature Creation:** Adding a TOTAL_SALES column by summing retail,
+    transfer, and warehouse sales.
 
--   Continue until the centers stop shifting.
+-   **Date Formatting:** Combining YEAR and MONTH into a single DATE
+    field.
 
-The optimal number of clusters (K) was determined using the Elbow method
-and Silhouette score.
+-   **Aggregation:** Summarizing data monthly by supplier and item code
+    to create consistent records for clustering.
 
-Because K-Means is effective, simple to understand, and appropriate for
-large-scale retail data, it was chosen. The findings aid in
-comprehending various client categories for focused marketing tactics.
+## Feature Engineering
 
-## Analysis and Results
+For each supplier or product, several key numerical features were
+calculated to represent inventory performance:
+
+| Feature           | Description                                |
+|-------------------|--------------------------------------------|
+| `total_sales`     | Total sales over the study period          |
+| `avg_monthly`     | Average monthly sales volume               |
+| `std_monthly`     | Standard deviation of monthly sales        |
+| `cv_monthly`      | Coefficient of variation (sales stability) |
+| `active_months`   | Months with nonzero sales                  |
+| `warehouse_share` | Ratio of warehouse to total sales          |
+
+These variables capture sales level, stability, and channel dependence.
+All values were standardized using z-score normalization for fair
+comparison.
+
+## Determining the Optimal Number of Clusters
+
+Selecting an appropriate number of clusters K is crucial for meaningful
+segmentation. Three complementary techniques were used:
+
+1.  **Elbow Method**: The Within-Cluster Sum of Squares (WCSS) was
+    plotted against increasing values of 𝐾. The point where the rate of
+    improvement sharply declines (“the elbow”) suggests an optimal
+    value.(@MacQueen1967)
+
+$$
+WCSS = \sum_{k=1}^{K} \sum_{x_i \in C_k} \| x_i - \mu_k \|^2
+$$
+
+2.  **Silhouette Coefficient**: Measures how well each observation fits
+    within its assigned cluster versus neighboring clusters, ranging
+    from -1 (poor) to +1 (well-separated).(@Rousseeuw1987)
+
+$$
+s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
+$$
+
+3.  **Practical Interpretation**: K=3 was chosen for managerial
+    relevance in order to represent the conventional fast-, medium-, and
+    slow-moving inventory classifications frequently found in retail
+    analytics.
+
+## K-Means Clustering Process
+
+By reducing the overall within-cluster variance, the K-Means algorithm
+divides data into K clusters(@Lloyd1982):
+
+$$
+\min_{C_1, \dots, C_K} \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2
+$$
+
+Algorithm steps:
+
+-   Set up K centroids at random.
+
+-   Using the Euclidean distance, assign each record to the closest
+    centroid.
+
+-   Centroids should be recalculated as the average of all allocated
+    points.
+
+-   Continue until the centroids stabilize.
+
+## Cluster Validation and Profiling
+
+Silhouette and Calinski-Harabasz indices were used to confirm cluster
+quality in order to guarantee separation and compactness. Segments were
+classified as fast, medium, or slow movers based on the median
+characteristics for each cluster (such as total sales, coefficient of
+variation, and warehouse share).
+
+The analysis of supplier patterns and cluster differences was aided by
+visualizations including heatmaps, charts, and bar plots.
 
 # Data Exploration and Visualization
 
-R Studio was used to clean and visualize the data. Monthly trends,
-supplier performance, and product categories were the main subjects of
-the analysis.
+## Data Sources and Collection:
 
-The holidays are when sales are at their highest, according to the
-visuals, and a select group of suppliers generate the greatest income.
-The best-selling products were wine and spirits, and warehouse sales
-were typically higher than retail sales.
+The Montgomery County Maryland Open Data
+Portal(@MontgomeryCountyWarehouseRetail2025) provided the dataset used
+in the present study.
 
-These trends demonstrate the dataset's substantial provider dominance
-and seasonal demand.
+It includes comprehensive monthly records of alcohol sales from 2017 to
+2020 that were gathered by the Department of Liquor Control from both
+retail locations and warehouse operations. Every record contains details
+regarding:
 
-Data Sources and Collection:
+-   Supplier name (vendor providing the product)
 
--   The Department of Liquor Control's Montgomery County, Maryland Open
-    Data Portal provided the data. Monthly retail, transfer, and
-    warehouse sales records by supplier and item type are included;
-    these records are updated on a regular basis and made publicly
-    accessible under a Public Domain License.
+-   item kind (beer, wine, spirits, etc.) and item code
 
-Initial Findings and Insights:
+-   Retail sales, retail transfers, and warehouse sales are a few such
+    sales channels.
 
--   Holiday seasons are when sales are at their highest.
+-   Temporal features: month and year
 
--   Overall sales are dominated by a small number of vendors.
+In order to encourage transparency in local government operations and
+business analytics research, the dataset is updated frequently and
+published under a Public Domain License.
 
--   Wine and spirits are the most popular product categories.
+## Exploratory Analysis
 
--   Sales in warehouses are higher than those in stores.
-
-Unexpected Patterns or Anomalies:
-
--   There are also duplicate item codes and missing supplier names.
-
--   certain months with sales figures that are abnormally high or low.
-
--   Retail transfer increases are probably related to restocking
-    occasions.
+The dataset was cleaned and summarized to look at overall sales trends,
+supplier performance, and product movement before the K-Means technique
+was applied. To comprehend central patterns and variability, descriptive
+statistics were produced using R Studio (tidyverse, ggplot2, and
+lubridate).
 
 ```{r, warning=FALSE, echo=T, message=FALSE}
 # loading packages 
@@ -211,7 +287,7 @@ data <- read_excel("Retail_Sales.xlsx")
 
 # View basic structure
 glimpse(data)
-summary(data)
+
 
 
 
@@ -237,18 +313,52 @@ data <- data %>%
 data <- data %>%
   mutate(Date = make_date(YEAR, MONTH, 1))
 
+# View first few cleaned rows in a table
+head(data, 20) %>% 
+  knitr::kable(caption = "first few Cleaned Retail Sales Data")
 ```
 
 ```{r}
 # Total Sales Trend Over Time
 
-ggplot(data, aes(x = Date, y = TOTAL_SALES)) +
-  geom_line(color = "steelblue", linewidth = 1) +
-  labs(title = "Total Sales Trend Over Time", x = "Date", y = "Total Sales") +
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(scales)
+
+# Ensure the Date column is in date format
+data <- data %>%
+  mutate(Date = as.Date(Date))
+
+# Aggregate sales by date (if multiple transactions per day)
+daily_sales <- data %>%
+  group_by(Date) %>%
+  summarise(Total_Sales = sum(TOTAL_SALES, na.rm = TRUE))
+
+# Line chart for total sales trend
+ggplot(daily_sales, aes(x = Date, y = Total_Sales)) +
+  geom_line(color = "darkblue", size = 1.2) +
+  geom_point(color = "orange", size = 1) +
+  labs(
+    title = "Total Sales Trend Over Time",
+    x = "Date of Transaction",
+    y = "Total Daily Sales (in USD)"
+  ) +
+  scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +
   scale_y_continuous(labels = comma) +
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
 
 ```
+
+**Insights:** This visualization shows the daily total sales trend over
+time. It highlights how sales fluctuate from day to day, revealing
+patterns such as peaks during high-demand periods and drops during
+slower days. The trend line helps identify overall performance changes
+and potential seasonal variations in sales.
 
 ```{r}
 # Top 10 Suppliers by Total Sales
@@ -269,6 +379,14 @@ ggplot(top_suppliers, aes(x = reorder(SUPPLIER, Total_Sales), y = Total_Sales, f
 
 ```
 
+**Insights:**A few suppliers control the majority of total revenue,
+according to the sales analysis. - With the greatest sales, Crown
+Imports, Miller Brewing Company, and Anheuser Busch Inc. demonstrate a
+concentrated supplier base where major vendors control the majority of
+the market. For these major contributors, this pattern emphasizes the
+significance of keeping solid supplier relationships and precise demand
+forecasting.
+
 ```{r}
 # Sales by Item Type
 
@@ -280,6 +398,19 @@ ggplot(data, aes(x = `ITEM TYPE`, y = TOTAL_SALES, fill = `ITEM TYPE`)) +
   theme(legend.position = "none")
 
 ```
+
+**Insights:**Beer dominates the retail industry, with sales close to \$8
+million, greatly outpacing all other categories, according to the sales
+distribution across item kinds. Liquor and Wine occupy the second and
+third spots, reflecting moderate but sustained demand. The fact that
+categories like dunnage, kegs, and non-alcoholic items make up very
+little of the overall revenue highlights the fact that alcoholic
+beverages are the main driver of the county's retail sector.
+
+-   Beer's dominance suggests a fast-moving inventory sector due to
+    frequent use and high brand loyalty. However, goods classified as
+    "Kegs" and "Non-Alcoholic" move slowly and would need focused
+    marketing techniques to boost sales.
 
 ```{r}
 # Comparison: Retail vs Warehouse Sales
@@ -300,6 +431,13 @@ ggplot(sales_compare, aes(x = Category, y = Sales, fill = Category)) +
 
 ```
 
+**Insights:**Warehouse sales are almost three times greater than retail
+sales, according to the analysis. This implies that rather than being
+sold directly to customers, the majority of merchandise is transferred
+in large quantities via centralized distribution. Although this type of
+layout promotes productivity, careful inventory balancing is necessary
+to prevent overstocking.
+
 ```{r}
 
 # Monthly Sales Heatmap
@@ -317,22 +455,120 @@ ggplot(monthly_sales, aes(x = factor(MONTH), y = factor(YEAR), fill = Total_Sale
 
 ```
 
-### Modeling and Results
+**Insights:**Due to seasonal and holiday demand spikes, sales activity
+peaks between December and the middle of the year. Early months see
+lower sales, while anomalies in 2020 point to potential outside
+interruptions such as the COVID-19 pandemic. Planning stock levels
+around seasonal trends is made easier by identifying these patterns.
 
--   Explain your data preprocessing and cleaning steps.
+# Analysis and Results
 
--   Present your key findings in a clear and concise manner.
+## Modeling and Data Preparation
 
--   Use visuals to support your claims.
+In order to eliminate duplicates, fill in missing values, and normalize
+variables for analysis, the Montgomery County retail dataset performed
+preprocessing. Retail, warehouse, and transfer sales were combined to
+produce a new Total Sales feature that made sure every record
+represented all transaction activity. The important quantitative
+variables—Total Sales, Retail Sales, and Warehouse Sales—were then
+grouped based on their sales volume and consistency using K-Means
+clustering.
 
--   **Tell a story about what the data reveals.**
+K = 3 was found to be the ideal number of clusters using the Elbow and
+Silhouette methods, creating three separate groups that represented
+Fast-Moving, Moderate-Moving, and Slow-Moving objects.
 
-```{r}
+## Cluster Formation and Categorization
 
-```
+| **Cluster** | **Characteristics** | **Interpretation** |
+|----|----|----|
+| **Cluster 1 – Slow-Moving Items** | Low total sales, high fluctuation, minimal retail movement | Items with limited or irregular demand, including niche products and low-selling categories. |
+| **Cluster 2 – Fast-Moving Items** | Very high total and warehouse sales, stable demand | Core items—especially beer and top liquor brands—requiring frequent replenishment. |
+| **Cluster 3 – Moderate-Moving Items** | Mid-range sales and steady monthly performance | Consistent products such as wines and mid-tier liquors, showing predictable but moderate sales. |
 
-### Conclusion
+## Visualization-Based Evidence
 
--   Summarize your key findings.
+1.**Top Suppliers by Total Sales:** Crown Imports, Miller Brewing
+Company, and Anheuser Busch Inc. are the top contributors, according to
+the supplier study. Their products are part of the Fast-Moving cluster,
+which drives the majority of overall sales and reflects ongoing consumer
+demand. Depending on category performance, lower-end suppliers like The
+Wine Group and Jim Beam Brands Co. represent either Moderate-Moving or
+Slow-Moving inventories.
 
--   Discuss the implications of your results.
+2.**Total Sales by Item Type:** Beer is clearly in the Fast-Moving
+category since it dominates overall sales. While categories like kegs,
+dunnage, and non-alcoholic items show minimal turnover and are
+categorized as Slow-Moving, wine maintains a robust but moderate
+flow—Moderate-Moving. This pattern demonstrates that the primary sources
+of income are alcoholic beverages.
+
+3.**Retail vs Warehouse Sales:** Comparison Retail sales (\~2.1 M) are
+much smaller than warehouse sales (\~7.8 M). Most Fast-Moving products
+with high warehouse volumes are kept in bulk to satisfy steady demand.
+The Moderate or Slow-Moving clusters include items with little warehouse
+activity but sporadic retail transactions.
+
+4.**Heatmap of Monthly Sales:** Fast-moving products that respond to
+event-driven consumption have seasonal maxima in the summer and
+December. Moderate-Moving products are those with consistent but reduced
+sales over the course of several months, whereas Slow-Moving clusters
+are those with inconsistent or occasional activity. The inconsistent
+2020 data probably reflects market disturbances brought on by the
+epidemic.
+
+## Cluster Insights
+
+-   **Slow-Moving Items (Cluster 1):** Specialty goods and low-demand
+    categories, such as kegs or non-alcoholic items.  To increase
+    turnover, they require tactics for reducing inventory and focused
+    promotions.
+
+-   **Fast-Moving items (Cluster 2) :**Include premium liquor, beer, and
+    products from top suppliers with high warehousing and total sales.
+    To avoid stock-outs, these need regular replenishing, precise
+    forecasting, and ongoing observation.
+
+-   **Moderate-Moving Items (Cluster 3):** These include secondary
+    brands and mid-tier goods like wine. They keep sales consistent,
+    which is perfect for managed safety stock and balanced reorder
+    cycles.
+
+# Conclusion
+
+## Key Findings
+
+-   The K-Means clustering divided the products into three clear groups
+    — Fast-Moving, Moderate-Moving, and Slow-Moving items.
+
+-   Fast-Moving items, like beer and popular liquor brands from
+    suppliers such as Crown Imports and Miller Brewing, had very high
+    and steady sales. These products need to be restocked often.
+
+-   Moderate-Moving items, such as wine, showed average and regular
+    sales. They are stable products that need balanced inventory levels.
+
+-   Slow-Moving items had low or irregular sales, mostly niche or
+    seasonal goods. These products need careful monitoring to avoid
+    overstock and storage costs.
+
+-   Sales increased during holiday seasons like summer and December,
+    showing that demand changes with time and events.
+
+## Results Summary
+
+The clustering results helped group inventory based on sales behavior
+and stock movement.
+
+This makes it easier for managers to:
+
+-   Focus on fast-selling items to keep shelves full,
+
+-   Maintain enough stock of moderate-selling items, and
+
+-   Reduce extra inventory of slow-selling items.
+
+Using K-Means clustering for inventory helps stores plan better, avoid
+waste, and respond quickly to customer demand. Overall, it supports
+smarter inventory control, better forecasting, and more efficient retail
+operations.
