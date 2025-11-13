@@ -31,16 +31,7 @@ editor:
 Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd`
 to edit)
 
-::: callout-important
-**Remember:** Your goal is to make your audience understand and care
-about your findings. By crafting a compelling story, you can effectively
-communicate the value of your data science project.
 
-Carefully read this template since it has instructions and tips to
-writing!
-
-Nice report!
-:::
 
 # Introduction
 
@@ -124,53 +115,29 @@ management system (@prasetiya2025review; @omol2024kenya;
 
 # Methods
 
-This project applies the K-Means clustering algorithm to identify sales
-and inventory patterns within the
-(@MontgomeryCountyWarehouseRetail2025). The data contain monthly sales
-information by supplier, item code, and item type, allowing segmentation
-of products and suppliers into categories such as fast-, medium-, and
-slow-moving items. The overall workflow involves data preprocessing,
-feature engineering, determination of the optimal number of clusters,
-application of the K-Means algorithm, and interpretation of cluster
-characteristics relevant to inventory management.
 
-## Data Preparation
+K-Means is an unsupervised machine learning method used to group similar data points into different clusters. It works by dividing all the data into a specific number of groups (called K) based on how close or similar the values are to each other. Each group has a center point called a centroid, and all the items in that group are close to that center.
 
-The dataset was obtained from (@MontgomeryCountyWarehouseRetail2025). It
-includes supplier names, item types, sales values, and dates (month,
-year).
+The goal of the K-Means algorithm is to make each group as compact as possible and different from the others.
 
-Steps taken before analysis included:
+In this project, the K-Means method is used to group items or suppliers based on their performance and sales behavior.
+The main idea is to find patterns — such as which products sell quickly, moderately, or slowly. By forming these clusters, we can easily understand sales trends and improve inventory or management decisions.
 
--   **Cleaning:** Replacing missing supplier or item types with
-    “Unknown” and filling null sales values with zero.
+This helps to:
 
--   **Feature Creation:** Adding a TOTAL_SALES column by summing retail,
-    transfer, and warehouse sales.
+- Identify fast-moving, moderate-moving, and slow-moving items.
 
--   **Date Formatting:** Combining YEAR and MONTH into a single DATE
-    field.
+- Analyze sales patterns and supplier performance.
 
--   **Aggregation:** Summarizing data monthly by supplier and item code
-    to create consistent records for clustering.
+- Support better decision-making for planning and restocking.
 
-## Feature Engineering
+- Simplify large data into meaningful, easy-to-understand groups.
 
-For each supplier or product, several key numerical features were
-calculated to represent inventory performance:
+In Simple Terms:
+This project uses K-Means clustering to automatically divide items or suppliers into groups based on how they behave.
+It helps to understand trends, improve decisions, and manage inventory more effectively by turning complex data into clear, useful insights.
 
-| Feature           | Description                                |
-|-------------------|--------------------------------------------|
-| `total_sales`     | Total sales over the study period          |
-| `avg_monthly`     | Average monthly sales volume               |
-| `std_monthly`     | Standard deviation of monthly sales        |
-| `cv_monthly`      | Coefficient of variation (sales stability) |
-| `active_months`   | Months with nonzero sales                  |
-| `warehouse_share` | Ratio of warehouse to total sales          |
 
-These variables capture sales level, stability, and channel dependence.
-All values were standardized using z-score normalization for fair
-comparison.
 
 ## Determining the Optimal Number of Clusters
 
@@ -231,9 +198,12 @@ variation, and warehouse share).
 The analysis of supplier patterns and cluster differences was aided by
 visualizations including heatmaps, charts, and bar plots.
 
-# Data Exploration and Visualization
+# Analysis and Results
 
-## Data Sources and Collection:
+## Data Exploration and Visualization
+
+
+**Data Sources and Collection:**
 
 The Montgomery County Maryland Open Data
 Portal(@MontgomeryCountyWarehouseRetail2025) provided the dataset used
@@ -257,7 +227,7 @@ In order to encourage transparency in local government operations and
 business analytics research, the dataset is updated frequently and
 published under a Public Domain License.
 
-## Exploratory Analysis
+**Exploratory Analysis**
 
 The dataset was cleaned and summarized to look at overall sales trends,
 supplier performance, and product movement before the K-Means technique
@@ -285,8 +255,7 @@ library(scales)
 
 data <- read_excel("Retail_Sales.xlsx")
 
-# View basic structure
-glimpse(data)
+
 
 
 
@@ -461,7 +430,7 @@ lower sales, while anomalies in 2020 point to potential outside
 interruptions such as the COVID-19 pandemic. Planning stock levels
 around seasonal trends is made easier by identifying these patterns.
 
-# Analysis and Results
+# Modeling and Results
 
 ## Modeling and Data Preparation
 

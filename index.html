@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)">
-<meta name="dcterms.date" content="2025-11-04">
+<meta name="dcterms.date" content="2025-11-13">
 
 <title>Applying K-Means Clustering in retail industry</title>
 <style>
@@ -3251,18 +3251,15 @@ window.Quarto = {
   </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">2</span> Methods</a>
   <ul class="collapse">
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><span class="header-section-number">2.1</span> Data Preparation</a></li>
-  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering"><span class="header-section-number">2.2</span> Feature Engineering</a></li>
-  <li><a href="#determining-the-optimal-number-of-clusters" id="toc-determining-the-optimal-number-of-clusters" class="nav-link" data-scroll-target="#determining-the-optimal-number-of-clusters"><span class="header-section-number">2.3</span> Determining the Optimal Number of Clusters</a></li>
-  <li><a href="#k-means-clustering-process" id="toc-k-means-clustering-process" class="nav-link" data-scroll-target="#k-means-clustering-process"><span class="header-section-number">2.4</span> K-Means Clustering Process</a></li>
-  <li><a href="#cluster-validation-and-profiling" id="toc-cluster-validation-and-profiling" class="nav-link" data-scroll-target="#cluster-validation-and-profiling"><span class="header-section-number">2.5</span> Cluster Validation and Profiling</a></li>
+  <li><a href="#determining-the-optimal-number-of-clusters" id="toc-determining-the-optimal-number-of-clusters" class="nav-link" data-scroll-target="#determining-the-optimal-number-of-clusters"><span class="header-section-number">2.1</span> Determining the Optimal Number of Clusters</a></li>
+  <li><a href="#k-means-clustering-process" id="toc-k-means-clustering-process" class="nav-link" data-scroll-target="#k-means-clustering-process"><span class="header-section-number">2.2</span> K-Means Clustering Process</a></li>
+  <li><a href="#cluster-validation-and-profiling" id="toc-cluster-validation-and-profiling" class="nav-link" data-scroll-target="#cluster-validation-and-profiling"><span class="header-section-number">2.3</span> Cluster Validation and Profiling</a></li>
   </ul></li>
-  <li><a href="#data-exploration-and-visualization" id="toc-data-exploration-and-visualization" class="nav-link" data-scroll-target="#data-exploration-and-visualization"><span class="header-section-number">3</span> Data Exploration and Visualization</a>
+  <li><a href="#analysis-and-results" id="toc-analysis-and-results" class="nav-link" data-scroll-target="#analysis-and-results"><span class="header-section-number">3</span> Analysis and Results</a>
   <ul class="collapse">
-  <li><a href="#data-sources-and-collection" id="toc-data-sources-and-collection" class="nav-link" data-scroll-target="#data-sources-and-collection"><span class="header-section-number">3.1</span> Data Sources and Collection:</a></li>
-  <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis"><span class="header-section-number">3.2</span> Exploratory Analysis</a></li>
+  <li><a href="#data-exploration-and-visualization" id="toc-data-exploration-and-visualization" class="nav-link" data-scroll-target="#data-exploration-and-visualization"><span class="header-section-number">3.1</span> Data Exploration and Visualization</a></li>
   </ul></li>
-  <li><a href="#analysis-and-results" id="toc-analysis-and-results" class="nav-link" data-scroll-target="#analysis-and-results"><span class="header-section-number">4</span> Analysis and Results</a>
+  <li><a href="#modeling-and-results" id="toc-modeling-and-results" class="nav-link" data-scroll-target="#modeling-and-results"><span class="header-section-number">4</span> Modeling and Results</a>
   <ul class="collapse">
   <li><a href="#modeling-and-data-preparation" id="toc-modeling-and-data-preparation" class="nav-link" data-scroll-target="#modeling-and-data-preparation"><span class="header-section-number">4.1</span> Modeling and Data Preparation</a></li>
   <li><a href="#cluster-formation-and-categorization" id="toc-cluster-formation-and-categorization" class="nav-link" data-scroll-target="#cluster-formation-and-categorization"><span class="header-section-number">4.2</span> Cluster Formation and Categorization</a></li>
@@ -3298,7 +3295,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 4, 2025</p>
+      <p class="date">November 13, 2025</p>
     </div>
   </div>
   
@@ -3311,21 +3308,6 @@ window.Quarto = {
 
 
 <p>Slides: <a href="slides.html" target="_blank">slides.html</a> ( Go to <code>slides.qmd</code> to edit)</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Remember:</strong> Your goal is to make your audience understand and care about your findings. By crafting a compelling story, you can effectively communicate the value of your data science project.</p>
-<p>Carefully read this template since it has instructions and tips to writing!</p>
-<p>Nice report!</p>
-</div>
-</div>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
 <p>In today’s data-driven corporate environment, understanding customer behavior and effectively managing inventories are key to organizational success. With the increased availability of transactional, demographic, and behavioral data, data mining and clustering techniques—particularly K-Means clustering—have become critical decision-making tools in retail, logistics, and marketing. Recent studies emphasize that algorithm selection and data preprocessing directly affect the quality of insights derived from clustering (<span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>).</p>
@@ -3342,59 +3324,19 @@ Important
 </section>
 <section id="methods" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Methods</h1>
-<p>This project applies the K-Means clustering algorithm to identify sales and inventory patterns within the (<span class="citation" data-cites="MontgomeryCountyWarehouseRetail2025">Montgomery County, Maryland, Government (<a href="#ref-MontgomeryCountyWarehouseRetail2025" role="doc-biblioref">2025</a>)</span>). The data contain monthly sales information by supplier, item code, and item type, allowing segmentation of products and suppliers into categories such as fast-, medium-, and slow-moving items. The overall workflow involves data preprocessing, feature engineering, determination of the optimal number of clusters, application of the K-Means algorithm, and interpretation of cluster characteristics relevant to inventory management.</p>
-<section id="data-preparation" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="data-preparation"><span class="header-section-number">2.1</span> Data Preparation</h2>
-<p>The dataset was obtained from (<span class="citation" data-cites="MontgomeryCountyWarehouseRetail2025">Montgomery County, Maryland, Government (<a href="#ref-MontgomeryCountyWarehouseRetail2025" role="doc-biblioref">2025</a>)</span>). It includes supplier names, item types, sales values, and dates (month, year).</p>
-<p>Steps taken before analysis included:</p>
+<p>K-Means is an unsupervised machine learning method used to group similar data points into different clusters. It works by dividing all the data into a specific number of groups (called K) based on how close or similar the values are to each other. Each group has a center point called a centroid, and all the items in that group are close to that center.</p>
+<p>The goal of the K-Means algorithm is to make each group as compact as possible and different from the others.</p>
+<p>In this project, the K-Means method is used to group items or suppliers based on their performance and sales behavior. The main idea is to find patterns — such as which products sell quickly, moderately, or slowly. By forming these clusters, we can easily understand sales trends and improve inventory or management decisions.</p>
+<p>This helps to:</p>
 <ul>
-<li><p><strong>Cleaning:</strong> Replacing missing supplier or item types with “Unknown” and filling null sales values with zero.</p></li>
-<li><p><strong>Feature Creation:</strong> Adding a TOTAL_SALES column by summing retail, transfer, and warehouse sales.</p></li>
-<li><p><strong>Date Formatting:</strong> Combining YEAR and MONTH into a single DATE field.</p></li>
-<li><p><strong>Aggregation:</strong> Summarizing data monthly by supplier and item code to create consistent records for clustering.</p></li>
+<li><p>Identify fast-moving, moderate-moving, and slow-moving items.</p></li>
+<li><p>Analyze sales patterns and supplier performance.</p></li>
+<li><p>Support better decision-making for planning and restocking.</p></li>
+<li><p>Simplify large data into meaningful, easy-to-understand groups.</p></li>
 </ul>
-</section>
-<section id="feature-engineering" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="feature-engineering"><span class="header-section-number">2.2</span> Feature Engineering</h2>
-<p>For each supplier or product, several key numerical features were calculated to represent inventory performance:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>total_sales</code></td>
-<td>Total sales over the study period</td>
-</tr>
-<tr class="even">
-<td><code>avg_monthly</code></td>
-<td>Average monthly sales volume</td>
-</tr>
-<tr class="odd">
-<td><code>std_monthly</code></td>
-<td>Standard deviation of monthly sales</td>
-</tr>
-<tr class="even">
-<td><code>cv_monthly</code></td>
-<td>Coefficient of variation (sales stability)</td>
-</tr>
-<tr class="odd">
-<td><code>active_months</code></td>
-<td>Months with nonzero sales</td>
-</tr>
-<tr class="even">
-<td><code>warehouse_share</code></td>
-<td>Ratio of warehouse to total sales</td>
-</tr>
-</tbody>
-</table>
-<p>These variables capture sales level, stability, and channel dependence. All values were standardized using z-score normalization for fair comparison.</p>
-</section>
-<section id="determining-the-optimal-number-of-clusters" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="determining-the-optimal-number-of-clusters"><span class="header-section-number">2.3</span> Determining the Optimal Number of Clusters</h2>
+<p>In Simple Terms: This project uses K-Means clustering to automatically divide items or suppliers into groups based on how they behave. It helps to understand trends, improve decisions, and manage inventory more effectively by turning complex data into clear, useful insights.</p>
+<section id="determining-the-optimal-number-of-clusters" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="determining-the-optimal-number-of-clusters"><span class="header-section-number">2.1</span> Determining the Optimal Number of Clusters</h2>
 <p>Selecting an appropriate number of clusters K is crucial for meaningful segmentation. Three complementary techniques were used:</p>
 <ol type="1">
 <li><strong>Elbow Method</strong>: The Within-Cluster Sum of Squares (WCSS) was plotted against increasing values of 𝐾. The point where the rate of improvement sharply declines (“the elbow”) suggests an optimal value.(<span class="citation" data-cites="MacQueen1967">MacQueen (<a href="#ref-MacQueen1967" role="doc-biblioref">1967</a>)</span>)</li>
@@ -3412,8 +3354,8 @@ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 <li><strong>Practical Interpretation</strong>: K=3 was chosen for managerial relevance in order to represent the conventional fast-, medium-, and slow-moving inventory classifications frequently found in retail analytics.</li>
 </ol>
 </section>
-<section id="k-means-clustering-process" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="k-means-clustering-process"><span class="header-section-number">2.4</span> K-Means Clustering Process</h2>
+<section id="k-means-clustering-process" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="k-means-clustering-process"><span class="header-section-number">2.2</span> K-Means Clustering Process</h2>
 <p>By reducing the overall within-cluster variance, the K-Means algorithm divides data into K clusters(<span class="citation" data-cites="Lloyd1982">Lloyd (<a href="#ref-Lloyd1982" role="doc-biblioref">1982</a>)</span>):</p>
 <p><span class="math display">\[
 \min_{C_1, \dots, C_K} \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2
@@ -3426,16 +3368,17 @@ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 <li><p>Continue until the centroids stabilize.</p></li>
 </ul>
 </section>
-<section id="cluster-validation-and-profiling" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="cluster-validation-and-profiling"><span class="header-section-number">2.5</span> Cluster Validation and Profiling</h2>
+<section id="cluster-validation-and-profiling" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="cluster-validation-and-profiling"><span class="header-section-number">2.3</span> Cluster Validation and Profiling</h2>
 <p>Silhouette and Calinski-Harabasz indices were used to confirm cluster quality in order to guarantee separation and compactness. Segments were classified as fast, medium, or slow movers based on the median characteristics for each cluster (such as total sales, coefficient of variation, and warehouse share).</p>
 <p>The analysis of supplier patterns and cluster differences was aided by visualizations including heatmaps, charts, and bar plots.</p>
 </section>
 </section>
-<section id="data-exploration-and-visualization" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Data Exploration and Visualization</h1>
-<section id="data-sources-and-collection" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="data-sources-and-collection"><span class="header-section-number">3.1</span> Data Sources and Collection:</h2>
+<section id="analysis-and-results" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Analysis and Results</h1>
+<section id="data-exploration-and-visualization" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="data-exploration-and-visualization"><span class="header-section-number">3.1</span> Data Exploration and Visualization</h2>
+<p><strong>Data Sources and Collection:</strong></p>
 <p>The Montgomery County Maryland Open Data Portal(<span class="citation" data-cites="MontgomeryCountyWarehouseRetail2025">Montgomery County, Maryland, Government (<a href="#ref-MontgomeryCountyWarehouseRetail2025" role="doc-biblioref">2025</a>)</span>) provided the dataset used in the present study.</p>
 <p>It includes comprehensive monthly records of alcohol sales from 2017 to 2020 that were gathered by the Department of Liquor Control from both retail locations and warehouse operations. Every record contains details regarding:</p>
 <ul>
@@ -3445,9 +3388,7 @@ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 <li><p>Temporal features: month and year</p></li>
 </ul>
 <p>In order to encourage transparency in local government operations and business analytics research, the dataset is updated frequently and published under a Public Domain License.</p>
-</section>
-<section id="exploratory-analysis" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="exploratory-analysis"><span class="header-section-number">3.2</span> Exploratory Analysis</h2>
+<p><strong>Exploratory Analysis</strong></p>
 <p>The dataset was cleaned and summarized to look at overall sales trends, supplier performance, and product movement before the K-Means technique was applied. To comprehend central patterns and variability, descriptive statistics were produced using R Studio (tidyverse, ggplot2, and lubridate).</p>
 <div class="cell">
 <details class="code-fold">
@@ -3471,48 +3412,36 @@ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Retail_Sales.xlsx&quot;</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># View basic structure</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 307,645
-Columns: 9
-$ YEAR               &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 2020, 2020, 202…
-$ MONTH              &lt;dbl&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, …
-$ SUPPLIER           &lt;chr&gt; &quot;A I G WINE &amp; SPIRITS&quot;, &quot;A I G WINE &amp; SPIRITS&quot;, &quot;AI…
-$ `ITEM CODE`        &lt;dbl&gt; 119229, 120200, 306528, 97039, 69953, 69954, 69490,…
-$ `ITEM DESCRIPTION` &lt;chr&gt; &quot;TROCADERO SPARK(BRUT) - 750ML&quot;, &quot;DOM DES FONTANELL…
-$ `ITEM TYPE`        &lt;chr&gt; &quot;WINE&quot;, &quot;WINE&quot;, &quot;WINE&quot;, &quot;BEER&quot;, &quot;BEER&quot;, &quot;BEER&quot;, &quot;KE…
-$ `RETAIL SALES`     &lt;dbl&gt; 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 3.25, 0.0…
-$ `RETAIL TRANSFERS` &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 0, …
-$ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10, 13,…</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicate rows</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">distinct</span>(data)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle missing values (replace or remove)</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">SUPPLIER =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(SUPPLIER), <span class="st">&quot;Unknown Supplier&quot;</span>, SUPPLIER),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>), <span class="st">&quot;Unknown Type&quot;</span>, <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span>), <span class="dv">0</span>, <span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span>),</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span>), <span class="dv">0</span>, <span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span>),</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>), <span class="dv">0</span>, <span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Total Sales column</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TOTAL_SALES =</span> <span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine YEAR and MONTH into a proper Date column</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">make_date</span>(YEAR, MONTH, <span class="dv">1</span>))</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># View first few cleaned rows in a table</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data, <span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;first few Cleaned Retail Sales Data&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove duplicate rows</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">distinct</span>(data)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Handle missing values (replace or remove)</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">SUPPLIER =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(SUPPLIER), <span class="st">&quot;Unknown Supplier&quot;</span>, SUPPLIER),</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>), <span class="st">&quot;Unknown Type&quot;</span>, <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span>), <span class="dv">0</span>, <span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span>),</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span>), <span class="dv">0</span>, <span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span>),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(<span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>), <span class="dv">0</span>, <span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Total Sales column</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">TOTAL_SALES =</span> <span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">RETAIL TRANSFERS</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine YEAR and MONTH into a proper Date column</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">make_date</span>(YEAR, MONTH, <span class="dv">1</span>))</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co"># View first few cleaned rows in a table</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data, <span class="dv">20</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;first few Cleaned Retail Sales Data&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -3813,38 +3742,38 @@ $ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10,
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total Sales Trend Over Time</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure the Date column is in date format</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.Date</span>(Date))</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate sales by date (if multiple transactions per day)</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>daily_sales <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sales =</span> <span class="fu">sum</span>(TOTAL_SALES, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Line chart for total sales trend</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(daily_sales, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Total_Sales)) <span class="sc">+</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Total Sales Trend Over Time&quot;</span>,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Date of Transaction&quot;</span>,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Total Daily Sales (in USD)&quot;</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%b %Y&quot;</span>, <span class="at">date_breaks =</span> <span class="st">&quot;1 month&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Total Sales Trend Over Time</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure the Date column is in date format</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">as.Date</span>(Date))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Aggregate sales by date (if multiple transactions per day)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>daily_sales <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sales =</span> <span class="fu">sum</span>(TOTAL_SALES, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Line chart for total sales trend</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(daily_sales, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Total_Sales)) <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">size =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;orange&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Total Sales Trend Over Time&quot;</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Date of Transaction&quot;</span>,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Total Daily Sales (in USD)&quot;</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%b %Y&quot;</span>, <span class="at">date_breaks =</span> <span class="st">&quot;1 month&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3858,21 +3787,21 @@ $ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10,
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 Suppliers by Total Sales</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>top_suppliers <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SUPPLIER) <span class="sc">%&gt;%</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sales =</span> <span class="fu">sum</span>(TOTAL_SALES, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Sales)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_suppliers, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(SUPPLIER, Total_Sales), <span class="at">y =</span> Total_Sales, <span class="at">fill =</span> SUPPLIER)) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 10 Suppliers by Total Sales&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Supplier&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Total Sales&quot;</span>) <span class="sc">+</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 Suppliers by Total Sales</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>top_suppliers <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SUPPLIER) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sales =</span> <span class="fu">sum</span>(TOTAL_SALES, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Total_Sales)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_suppliers, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(SUPPLIER, Total_Sales), <span class="at">y =</span> Total_Sales, <span class="at">fill =</span> SUPPLIER)) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 10 Suppliers by Total Sales&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Supplier&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Total Sales&quot;</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3886,14 +3815,14 @@ $ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10,
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sales by Item Type</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>, <span class="at">y =</span> TOTAL_SALES, <span class="at">fill =</span> <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;sum&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Total Sales by Item Type&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Item Type&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Total Sales&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sales by Item Type</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>, <span class="at">y =</span> TOTAL_SALES, <span class="at">fill =</span> <span class="st">`</span><span class="at">ITEM TYPE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;summary&quot;</span>, <span class="at">fun =</span> <span class="st">&quot;sum&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Total Sales by Item Type&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Item Type&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Total Sales&quot;</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3910,21 +3839,21 @@ $ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10,
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparison: Retail vs Warehouse Sales</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sales_compare <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Retail_Sales =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Warehouse_Sales =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Category&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Sales&quot;</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sales_compare, <span class="fu">aes</span>(<span class="at">x =</span> Category, <span class="at">y =</span> Sales, <span class="at">fill =</span> Category)) <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Retail vs Warehouse Sales&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sales&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparison: Retail vs Warehouse Sales</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sales_compare <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Retail_Sales =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">RETAIL SALES</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Warehouse_Sales =</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">WAREHOUSE SALES</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;Category&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;Sales&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sales_compare, <span class="fu">aes</span>(<span class="at">x =</span> Category, <span class="at">y =</span> Sales, <span class="at">fill =</span> Category)) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Retail vs Warehouse Sales&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Sales&quot;</span>) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3938,18 +3867,18 @@ $ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10,
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Monthly Sales Heatmap</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>monthly_sales <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR, MONTH) <span class="sc">%&gt;%</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sales =</span> <span class="fu">sum</span>(TOTAL_SALES, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(monthly_sales, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(MONTH), <span class="at">y =</span> <span class="fu">factor</span>(YEAR), <span class="at">fill =</span> Total_Sales)) <span class="sc">+</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;magma&quot;</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">labels =</span> comma) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Monthly Sales Heatmap&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Month&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Total Sales&quot;</span>) <span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Monthly Sales Heatmap</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>monthly_sales <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR, MONTH) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total_Sales =</span> <span class="fu">sum</span>(TOTAL_SALES, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(monthly_sales, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(MONTH), <span class="at">y =</span> <span class="fu">factor</span>(YEAR), <span class="at">fill =</span> Total_Sales)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">&quot;magma&quot;</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">labels =</span> comma) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Monthly Sales Heatmap&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Month&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;Total Sales&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -3962,8 +3891,8 @@ $ `WAREHOUSE SALES`  &lt;dbl&gt; 4, 3, 1, 3, 12, 12, 3, 45, 2, 0, 20, 6, 11, 10,
 <p><strong>Insights:</strong>Due to seasonal and holiday demand spikes, sales activity peaks between December and the middle of the year. Early months see lower sales, while anomalies in 2020 point to potential outside interruptions such as the COVID-19 pandemic. Planning stock levels around seasonal trends is made easier by identifying these patterns.</p>
 </section>
 </section>
-<section id="analysis-and-results" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Analysis and Results</h1>
+<section id="modeling-and-results" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Modeling and Results</h1>
 <section id="modeling-and-data-preparation" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="modeling-and-data-preparation"><span class="header-section-number">4.1</span> Modeling and Data Preparation</h2>
 <p>In order to eliminate duplicates, fill in missing values, and normalize variables for analysis, the Montgomery County retail dataset performed preprocessing. Retail, warehouse, and transfer sales were combined to produce a new Total Sales feature that made sure every record represented all transaction activity. The important quantitative variables—Total Sales, Retail Sales, and Warehouse Sales—were then grouped based on their sales volume and consistency using K-Means clustering.</p>
