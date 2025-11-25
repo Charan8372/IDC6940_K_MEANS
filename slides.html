@@ -1165,7 +1165,6 @@ margin-right: 0; }
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Applying K-Means Clustering in retail industry</h1>
-  <p class="subtitle">This is a Slide Template</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -1237,6 +1236,9 @@ Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)
 <li><p>K-Means for grocery stores in Kenya.</p></li>
 <li><p>Customer behavior linked to age and income.</p></li>
 </ul>
+</section>
+<section id="literature-review-1" class="slide level2 smaller">
+<h2>Literature Review</h2>
 <p><span class="citation" data-cites="bala2012forecast">Bala (<a href="#/references" role="doc-biblioref" onclick>2012</a>)</span>:</p>
 <ul>
 <li>Clustering + demand forecasting → better inventory accuracy.</li>
@@ -1246,16 +1248,14 @@ Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)
 <li>Products clustered into fast, medium, slow demand categories.</li>
 </ul>
 </section>
-<section id="literature-review-1" class="slide level2 smaller2">
+<section id="literature-review-2" class="slide level2 smaller">
 <h2>Literature Review</h2>
-<p><strong>Gaps on Many papers:</strong></p>
+<p><strong>Gaps on Many papers:</strong> - Do not clearly show data preprocessing.</p>
 <ul>
-<li><p>Do not clearly show data preprocessing.</p></li>
 <li><p>Do not fully explain how K is chosen.</p></li>
 <li><p>Use non-public datasets.</p></li>
 </ul>
-<p><strong>Our contribution</strong></p>
-<p>Use an open government dataset.</p>
+<p><strong>Our contribution</strong> Use an open government dataset.</p>
 <p>Clearly document:</p>
 <ul>
 <li><p>Cleaning and feature engineering</p></li>
@@ -1272,9 +1272,8 @@ WCSS = \sum_{k=1}^{K} \sum_{x_i \in C_k} \| x_i - \mu_k \|^2
 \]</span></p>
 <p>The goal is to create clusters that are compact (low variance) and well separated.</p>
 <p>In this project, K-Means is used to group retail items based on their sales behavior—helping identify fast-, moderate-, and slow-moving products.</p>
-<p>Why we use it:</p>
+<p>Why we use it: - Finds natural patterns in sales data</p>
 <ul>
-<li><p>Finds natural patterns in sales data</p></li>
 <li><p>Helps classify product movement levels</p></li>
 <li><p>Supports better inventory planning</p></li>
 <li><p>Simplifies complex data into clear groups</p></li>
@@ -1328,10 +1327,7 @@ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 </section>
 <section id="data-preprocessing" class="slide level2 smaller">
 <h2>Data Preprocessing</h2>
-<p>Aggregated data from monthly level to item level:</p>
-<ul>
-<li>One row per supplier–item.</li>
-</ul>
+<p>Aggregated data from monthly level to item level: - One row per supplier–item.</p>
 <p>Created:</p>
 <ul>
 <li>TOTAL_SALES = RETAIL_SALES + RETAIL_TRANSFERS + WAREHOUSE_SALES</li>
@@ -1496,20 +1492,17 @@ s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 <section id="cluster-insights-slow-moving-cluster-2" class="slide level2 smaller">
 <h2>Cluster Insights: Slow-Moving (Cluster 2)</h2>
 <p>Largest number of items, but low sales per item.</p>
-<p>Many are:</p>
+<p>Many are: - Niche</p>
 <ul>
-<li><p>Niche</p></li>
 <li><p>Seasonal</p></li>
 <li><p>Low-demand products</p></li>
 </ul>
-<p>Risks:</p>
+<p>Risks: - Overstocking</p>
 <ul>
-<li><p>Overstocking</p></li>
-<li><p>High holding costs</p></li>
+<li>High holding costs</li>
 </ul>
-<p>Management actions:</p>
+<p>Management actions: - Reduce order quantities</p>
 <ul>
-<li><p>Reduce order quantities</p></li>
 <li><p>Use promotions/discounts</p></li>
 <li><p>Consider discontinuation of chronic slow movers</p></li>
 </ul>

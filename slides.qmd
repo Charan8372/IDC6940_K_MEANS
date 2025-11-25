@@ -1,6 +1,6 @@
 ---
 title: "Applying K-Means Clustering in retail industry"
-subtitle: "This is a Slide Template"
+
 author: "Charan Gullipalli, Lavanya Guntupalli, Arun Pandian  (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
@@ -102,6 +102,8 @@ K-Means is widely used in retail analytics:
 
 -   Customer behavior linked to age and income.
 
+## Literature Review {.smaller}
+
 @bala2012forecast:
 
 -   Clustering + demand forecasting → better inventory accuracy.
@@ -110,10 +112,9 @@ K-Means is widely used in retail analytics:
 
 -   Products clustered into fast, medium, slow demand categories.
 
-## Literature Review {.smaller2}
+## Literature Review {.smaller}
 
 **Gaps on Many papers:**
-
 -   Do not clearly show data preprocessing.
 
 -   Do not fully explain how K is chosen.
@@ -121,7 +122,6 @@ K-Means is widely used in retail analytics:
 -   Use non-public datasets.
 
 **Our contribution**
-
 Use an open government dataset.
 
 Clearly document:
@@ -153,7 +153,6 @@ sales behavior—helping identify fast-, moderate-, and slow-moving
 products.
 
 Why we use it:
-
 -   Finds natural patterns in sales data
 
 -   Helps classify product movement levels
@@ -230,7 +229,6 @@ Public-domain dataset → analysis is reproducible
 ## Data Preprocessing {.smaller}
 
 Aggregated data from monthly level to item level:
-
 -   One row per supplier–item.
 
 Created:
@@ -619,7 +617,6 @@ Management actions:
 Largest number of items, but low sales per item.
 
 Many are:
-
 - Niche
 
 - Seasonal
@@ -627,13 +624,11 @@ Many are:
 - Low-demand products
 
 Risks:
-
 - Overstocking
 
 - High holding costs
 
 Management actions:
-
 - Reduce order quantities
 
 - Use promotions/discounts
