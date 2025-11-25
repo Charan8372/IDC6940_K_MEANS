@@ -333,6 +333,7 @@ library(readxl)
 library(lubridate)
 library(cluster)    # for silhouette()
 library(factoextra) # for convenient plots (optional)
+library(scales)   
 
 # Read Excel file
 retail_raw <- read_excel("Retail_Sales.xlsx")
@@ -459,6 +460,7 @@ cluster_sizes <- items_clustered %>%
 
 cluster_sizes
 ```
+
 The cluster size results showed a very uneven distribution:
 
 -   Cluster 1: 17 items
@@ -466,6 +468,7 @@ The cluster size results showed a very uneven distribution:
 -   Cluster 2: 37,667 items
 
 -   Cluster 3: 240 items
+
 ```{r}
 # Centroids on scaled features (for technical report)
 cluster_centroids_scaled <- as_tibble(k3_model$centers) %>%
@@ -490,8 +493,6 @@ cluster_summary <- items_clustered %>%
 cluster_summary
 ```
 
-
-
 The centroids and averages revealed that:
 
 -   Cluster 1 has the highest total sales (≈139,000 on average), making
@@ -507,6 +508,33 @@ This three-group structure matches typical inventory movement patterns
 in retail and aligns with managerial frameworks for stock
 classification. The profiling confirms that K-Means successfully
 distinguished high-demand items from mid-level and slow-moving products.
+
+## Cluster Visualization: Scatter Plot
+
+```{r}
+ggplot(items_clustered,
+       aes(x = WAREHOUSE_SALES,
+           y = TOTAL_SALES,
+           color = cluster)) +
+  geom_point(alpha = 0.5, size = 1) +
+  scale_x_continuous(labels = scales::comma) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "K-Means Clusters (K = 3)",
+    x = "Warehouse Sales",
+    y = "Total Sales",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+```
+
+**Interpretation**
+
+-   Cluster 1: points in high-sales region → Fast-Moving.
+
+-   Cluster 2: dense cloud near origin → Slow-Moving.
+
+-   Cluster 3: middle zone → Moderate-Moving.
 
 ## Exploratory Analysis
 
@@ -574,9 +602,7 @@ data <- data %>%
 data <- data %>%
   mutate(Date = make_date(YEAR, MONTH, 1))
 
-# View first few cleaned rows in a table
-head(data, 20) %>% 
-  knitr::kable(caption = "first few Cleaned Retail Sales Data")
+
 ```
 
 ```{r}
