@@ -1,7 +1,7 @@
 ---
-title: "Present a great story for data science projects"
+title: "Applying K-Means Clustering in retail industry"
 subtitle: "This is a Slide Template"
-author: "Students names (Advisor: Dr. Cohen)"
+author: "Charan Gullipalli, Lavanya Guntupalli, Arun Pandian  (Advisor: Dr. Cohen)"
 date: '`r Sys.Date()`'
 format:
   revealjs
@@ -17,7 +17,7 @@ editor:
     wrap: 72
 ---
 
-## Introduction
+## Introduction {.smaller}
 
 Retail businesses generate massive amounts of sales and customer data.
 
@@ -39,7 +39,7 @@ Studies across retail markets—from large chains to small grocery
 stores—show that K-Means can separate products into meaningful groups
 such as fast, moderate, and slow movers.
 
-## Introduction
+## Introduction {.smaller}
 
 Improvements like weighted K-Means and MiniBatch K-Means have made
 clustering faster and more accurate, especially for large datasets.
@@ -58,7 +58,7 @@ This project fills those gaps by:
 
 -   Validating the results with Silhouette and CH Index
 
-## Problem & Research Questions
+## Problem & Research Questions {.smaller}
 
 **Problem**
 
@@ -80,7 +80,7 @@ Do clusters map to:
 
 How can these clusters help managers make better decisions?
 
-## Literature Review
+## Literature Review {.smaller}
 
 K-Means is widely used in retail analytics:
 
@@ -110,7 +110,7 @@ K-Means is widely used in retail analytics:
 
 -   Products clustered into fast, medium, slow demand categories.
 
-## Literature Review
+## Literature Review {.smaller2}
 
 **Gaps on Many papers:**
 
@@ -132,7 +132,7 @@ Clearly document:
 
 -   Cluster validation and interpretation
 
-## Methods: K-Means Overview
+## Methods: K-Means Overview {.smaller}
 
 K-Means is an unsupervised machine learning algorithm that groups
 similar data points into K clusters. Each cluster has a centroid, and
@@ -166,7 +166,7 @@ Why we use it:
 based on how they sell. This helps managers quickly understand which
 products sell fast, which are steady, and which move slowly.
 
-## Methods: Choosing K
+## Methods: Choosing K {.smaller}
 
 We used three approaches:
 
@@ -186,7 +186,7 @@ Range: -1 to 1 (higher is better) $$
 s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 $$
 
-## Methods: Choosing K
+## Methods: Choosing K {.smaller}
 
 **Calinski–Harabasz Index** Measures how well clusters are formed by
 comparing:
@@ -206,7 +206,7 @@ This also fits business logic of Fast, Moderate, and Slow-moving items.
 **Takeaway:** CH Index confirms that 3 clusters give the most meaningful
 and well-defined structure.
 
-## Data Source
+## Data Source {.smaller}
 
 Dataset: Warehouse and Retail Sales
 
@@ -227,7 +227,7 @@ Records include:
 
 Public-domain dataset → analysis is reproducible
 
-## Data Preprocessing
+## Data Preprocessing {.smaller}
 
 Aggregated data from monthly level to item level:
 
@@ -284,7 +284,7 @@ features <- items %>%
 features_scaled <- scale(features)
 ```
 
-## Elbow Method
+## Elbow Method {.smaller}
 
 The Elbow Method was used to evaluate different values of 𝐾 by
 calculating the Within-Cluster Sum of Squares (WCSS) for 𝐾=2 through
@@ -324,7 +324,7 @@ would not significantly improve separation. This result supports
 choosing three clusters as an appropriate and efficient segmentation of
 the retail items.
 
-## Silhouette Analysis
+## Silhouette Analysis {.smaller}
 
 To validate the Elbow Method, a Silhouette analysis was performed for
 𝐾=3. The Silhouette score measures how close each item is to its own
@@ -360,7 +360,7 @@ fviz_silhouette(sil_obj) +
 
 -   Confirms that 3 clusters are meaningful and well-separated.
 
-## Cluster Profiling: Sizes
+## Cluster Profiling: Sizes {.smaller}
 
 ```{r}
 items_clustered <- items %>%
@@ -390,7 +390,7 @@ This suggests:
 
 -   A mid-sized group with moderate sales (Cluster 3).
 
-## Cluster Profiling: Means
+## Cluster Profiling: Means {.smaller}
 
 ```{r}
 # Centroids on scaled features (for technical report)
@@ -427,7 +427,7 @@ Cluster 3
 
 -   Medium mean total sales → Moderate-Moving
 
-## Exploratory Analysis: Total Sales Trend
+## Exploratory Analysis: Total Sales Trend {.smaller}
 
 ```{r}
 # loading packages 
@@ -523,7 +523,7 @@ Clear seasonal patterns:
 
 2020 shows irregularities → likely COVID-19 effect.
 
-## Exploratory Analysis: Top Suppliers
+## Exploratory Analysis: Top Suppliers {.smaller}
 
 ```{r}
 top_suppliers <- data %>%
@@ -546,7 +546,7 @@ ggplot(top_suppliers, aes(x = reorder(SUPPLIER, Total_Sales), y = Total_Sales, f
 
 -   These suppliers contribute heavily to fast-moving items.
 
-## Exploratory Analysis: Item Types
+## Exploratory Analysis: Item Types {.smaller}
 
 ```{r}
 # Sales by Item Type
@@ -567,7 +567,7 @@ ggplot(data, aes(x = `ITEM TYPE`, y = TOTAL_SALES, fill = `ITEM TYPE`)) +
 
 - Kegs and non-alcoholic products → slow-moving side.
 
-## Cluster Visualization: Scatter Plot
+## Cluster Visualization: Scatter Plot {.smaller}
 ```{r}
 ggplot(items_clustered,
        aes(x = WAREHOUSE_SALES,
@@ -594,7 +594,7 @@ ggplot(items_clustered,
 - Cluster 3: middle zone → Moderate-Moving.
 
 
-## Cluster Insights: Fast-Moving (Cluster 1)
+## Cluster Insights: Fast-Moving (Cluster 1) {.smaller}
 
 
 Very high total and warehouse sales.
@@ -615,7 +615,7 @@ Management actions:
 
 - Priority storage & shelf space
 
-## Cluster Insights: Slow-Moving (Cluster 2)
+## Cluster Insights: Slow-Moving (Cluster 2) {.smaller}
 Largest number of items, but low sales per item.
 
 Many are:
@@ -640,7 +640,7 @@ Management actions:
 
 - Consider discontinuation of chronic slow movers
 
-## Cluster Insights: Moderate-Moving (Cluster 3)
+## Cluster Insights: Moderate-Moving (Cluster 3) {.smaller}
 Medium total sales, stable demand.
 
 Many wines and mid-tier spirits.
@@ -659,7 +659,7 @@ Regular review of trends
 
 - Adjust assortment based on performance
 
-## Conclusion: Key Findings
+## Conclusion: Key Findings {.smaller}
 
 K-Means with K = 3 produced three meaningful clusters:
 
@@ -674,7 +674,7 @@ Seasonal patterns and supplier concentration strongly affect sales.
 Clustering turned a large, complex dataset into three clear groups
 that managers can use for decision-making.
 
-## Conclusion: Managerial Implications
+## Conclusion: Managerial Implications {.smaller}
 Focus on:
 
 - Fast-moving items → avoid stock-outs.
@@ -691,4 +691,4 @@ Using K-Means for inventory:
 
 - Reduces risk of overstock and lost sales
 
-## References
+## References {.smaller}
