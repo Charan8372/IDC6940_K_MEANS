@@ -430,6 +430,55 @@ Cluster 3
 ## Exploratory Analysis: Total Sales Trend
 
 ```{r}
+# loading packages 
+library(tidyverse)
+library(knitr)
+library(ggthemes)
+library(ggrepel)
+library(dslabs)
+
+
+# Load libraries
+library(readxl)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(scales)
+
+# Read Excel file (update the file path if needed)
+
+data <- read_excel("Retail_Sales.xlsx")
+
+
+
+
+
+
+
+# Remove duplicate rows
+data <- distinct(data)
+
+# Handle missing values (replace or remove)
+data <- data %>%
+  mutate(
+    SUPPLIER = ifelse(is.na(SUPPLIER), "Unknown Supplier", SUPPLIER),
+    `ITEM TYPE` = ifelse(is.na(`ITEM TYPE`), "Unknown Type", `ITEM TYPE`),
+    `RETAIL SALES` = ifelse(is.na(`RETAIL SALES`), 0, `RETAIL SALES`),
+    `RETAIL TRANSFERS` = ifelse(is.na(`RETAIL TRANSFERS`), 0, `RETAIL TRANSFERS`),
+    `WAREHOUSE SALES` = ifelse(is.na(`WAREHOUSE SALES`), 0, `WAREHOUSE SALES`)
+  )
+
+# Create a Total Sales column
+data <- data %>%
+  mutate(TOTAL_SALES = `RETAIL SALES` + `RETAIL TRANSFERS` + `WAREHOUSE SALES`)
+
+# Combine YEAR and MONTH into a proper Date column
+data <- data %>%
+  mutate(Date = make_date(YEAR, MONTH, 1))
+
+
+# Total Sales Trend Over Time
+
 library(ggplot2)
 library(dplyr)
 library(lubridate)
@@ -461,7 +510,7 @@ ggplot(daily_sales, aes(x = Date, y = Total_Sales)) +
     plot.title = element_text(face = "bold", hjust = 0.5)
   )
 
-
+  
 ```
 
 **Key takeaway**
