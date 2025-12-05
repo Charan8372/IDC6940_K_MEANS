@@ -283,13 +283,7 @@ features_scaled <- scale(features)
 ```
 
 ## Elbow Method {.smaller}
-
-The Elbow Method was used to evaluate different values of 𝐾 by
-calculating the Within-Cluster Sum of Squares (WCSS) for 𝐾=2 through
-𝐾=8. The Elbow plot shows how much WCSS decreases as the number of
-clusters increases. A sharp drop is usually followed by a flattening of
-the curve—this “elbow” indicates a good balance between simplicity and
-accuracy.
+The Elbow Method evaluates different values of K by computing the Within-Cluster Sum of Squares (WCSS) for each K. As K increases, WCSS decreases because clusters become smaller. The “elbow point” is where the reduction in WCSS slows down, indicating the best balance between simplicity and accuracy.
 
 ```{r}
 set.seed(123)
@@ -316,19 +310,10 @@ ggplot(elbow_df, aes(x = k, y = WCSS)) +
   theme_minimal()
 ```
 
-The WCSS curve showed a clear bend at 𝐾=3. Beyond three clusters, the
-reduction in WCSS became minimal, suggesting that additional clusters
-would not significantly improve separation. This result supports
-choosing three clusters as an appropriate and efficient segmentation of
-the retail items.
+In our plot, the curve shows a clear bend at K = 3, meaning that adding more clusters does not significantly reduce WCSS. Therefore, K = 3 was selected as the optimal and most efficient number of clusters for this dataset.
 
 ## Silhouette Analysis {.smaller}
-
-To validate the Elbow Method, a Silhouette analysis was performed for
-𝐾=3. The Silhouette score measures how close each item is to its own
-cluster compared to other clusters. Values close to +1 indicate strong
-cohesion within clusters and clear separation between them.
-
+A Silhouette analysis was used to validate K = 3 by measuring how well each item fits within its assigned cluster compared to others. Scores close to +1 indicate strong cohesion and clear separation. The high average silhouette value confirms that K = 3 forms well-defined, meaningful clusters.
 ```{r}
 set.seed(123)
 
@@ -348,15 +333,14 @@ mean_silhouette
 fviz_silhouette(sil_obj) +
   labs(title = "Silhouette Plot for K = 3")
 ```
-
+## Silhouette Analysis {.smaller}
 -   Average Silhouette ≈ 0.97 → excellent cluster structure.
-
 -   Cluster 2: Silhouette ≈ 0.98 → very tight and well-separated.
-
 -   Clusters 1 and 3: smaller groups with lower but positive
     silhouettes.
-
 -   Confirms that 3 clusters are meaningful and well-separated.
+
+
 
 ## Cluster Profiling: Sizes {.smaller}
 
@@ -413,19 +397,54 @@ cluster_summary <- items_clustered %>%
 cluster_summary
 ```
 
-**Interpretation** Cluster 1
+**Interpretation**
 
--   Very high mean total & warehouse sales → Fast-Moving
+- Cluster 1 has the highest total sales (≈139,000 on average), making it the Fast-Moving cluster.
 
-Cluster 2
+- Cluster 2 has very low total sales (≈155), representing Slow-Moving items.
 
--   Very low mean total sales → Slow-Moving
+- Cluster 3 shows moderate total sales (≈16,695), identifying it as the Moderate-Moving cluster.
 
-Cluster 3
+## Cluster Visualization: Scatter Plot {.smaller}
+```{r}
+ggplot(items_clustered,
+       aes(x = WAREHOUSE_SALES,
+           y = TOTAL_SALES,
+           color = cluster)) +
+  geom_point(alpha = 0.5, size = 1.1) +
+  
+  # X-axis: log10, start at 100, no gap
+  scale_x_log10(
+    labels = scales::comma,
+    limits = c(100, NA),
+    expand = c(0, 0)   # <-- removes the gap at the axis
+  ) +
+  
+  # Y-axis: log10, start at 100, no gap
+  scale_y_log10(
+    labels = scales::comma,
+    limits = c(100, NA),
+    expand = c(0, 0)   # <-- removes the gap at the axis
+  ) +
+  
+  labs(
+    title = "K-Means Clusters",
+    x = "Warehouse Sales",
+    y = "Total Sales",
+    color = "Cluster"
+  ) +
+  theme_minimal()
 
--   Medium mean total sales → Moderate-Moving
+```
+**Interpretation**
 
-## Exploratory Analysis: Total Sales Trend {.smaller}
+- Cluster 1: points in high-sales region → Fast-Moving.
+
+- Cluster 2: dense cloud near origin → Slow-Moving.
+
+- Cluster 3: middle zone → Moderate-Moving.
+
+## Exploratory Analysis:Sales Trend {.smaller}
 
 ```{r}
 # loading packages 
@@ -512,7 +531,6 @@ ggplot(daily_sales, aes(x = Date, y = Total_Sales)) +
 ```
 
 **Key takeaway**
-
 Clear seasonal patterns:
 
 -   Peaks around mid-year and December.
@@ -539,6 +557,7 @@ ggplot(top_suppliers, aes(x = reorder(SUPPLIER, Total_Sales), y = Total_Sales, f
   theme(legend.position = "none")
 ```
 **Key takeaway**
+
 -   A few suppliers (e.g., Crown Imports, Miller, Anheuser Busch)
     dominate sales.
 
@@ -565,125 +584,150 @@ ggplot(data, aes(x = `ITEM TYPE`, y = TOTAL_SALES, fill = `ITEM TYPE`)) +
 
 - Kegs and non-alcoholic products → slow-moving side.
 
-## Cluster Visualization: Scatter Plot {.smaller}
-```{r}
-ggplot(items_clustered,
-       aes(x = WAREHOUSE_SALES,
-           y = TOTAL_SALES,
-           color = cluster)) +
-  geom_point(alpha = 0.5, size = 1) +
-  scale_x_continuous(labels = scales::comma) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(
-    title = "K-Means Clusters (K = 3)",
-    x = "Warehouse Sales",
-    y = "Total Sales",
-    color = "Cluster"
-  ) +
-  theme_minimal()
-
-```
-**Interpretation**
-
-- Cluster 1: points in high-sales region → Fast-Moving.
-
-- Cluster 2: dense cloud near origin → Slow-Moving.
-
-- Cluster 3: middle zone → Moderate-Moving.
 
 
-## Cluster Insights: Fast-Moving (Cluster 1) {.smaller}
 
+## Cluster Insights:Fast-Moving(Cluster 1) {.smaller}
+Items in this cluster represent the highest-performing products in the entire dataset.
+Although Cluster 1 contains only a small number of items, these products generate exceptionally high total and warehouse sales, making them the core revenue drivers for the county’s retail system.
 
-Very high total and warehouse sales.
-
-Small number of items, but critical for revenue.
-
-Mostly:
-
-- Major beer brands
-
-- Top liquor products
+These are predominantly major beer brands and leading liquor products, which sell consistently in high volumes across months and seasons. Because of their strong and stable demand, they require close operational attention.
 
 Management actions:
 
-- Frequent replenishment
+- Ensure frequent replenishment to prevent stock-outs, especially during peak seasons.
 
-- Tight forecasting
+- Apply tight demand forecasting, as small forecasting errors can create major revenue losses.
 
-- Priority storage & shelf space
+- Allocate priority shelf space and warehouse storage, since these items sustain customer satisfaction and overall sales performance.
 
 ## Cluster Insights: Slow-Moving (Cluster 2) {.smaller}
-Largest number of items, but low sales per item.
 
-Many are:
-- Niche
+Cluster 2 contains the largest number of items, but each item contributes very little to total sales. These products typically have low, irregular, or seasonal demand, and many belong to niche categories such as specialty beverages, certain kegs, or non-alcoholic items.
 
-- Seasonal
+Because they occupy significant space but contribute minimally to revenue, these items pose inventory risks, including excess holding costs and potential spoilage or obsolescence.
 
-- Low-demand products
+## Cluster Insights: Slow-Moving (Cluster 2) {.smaller}
 
-Risks:
-- Overstocking
+**Risks**:
 
-- High holding costs
+- Overstocking, due to slow turnover
 
-Management actions:
-- Reduce order quantities
+- Increased carrying and storage costs
 
-- Use promotions/discounts
+- Shelf space tied up by low-performing items
 
-- Consider discontinuation of chronic slow movers
+**Management actions**:
+
+- Reduce order quantities to avoid unnecessary stock accumulation.
+
+- Use discounts, promotions, or bundling to stimulate movement.
+
+- Consider discontinuing chronic slow movers that repeatedly underperform and do not serve strategic purposes.
 
 ## Cluster Insights: Moderate-Moving (Cluster 3) {.smaller}
-Medium total sales, stable demand.
 
-Many wines and mid-tier spirits.
+Items in this cluster fall between fast and slow movers. They exhibit moderate total sales with stable, predictable demand patterns. Many products in this group include wines and mid-tier spirits that customers purchase regularly, though in lower volumes than the top-selling items.
 
-Role:
+Moderate movers help maintain a balanced product assortment. They diversify revenue streams, support customer preferences, and contribute to consistent monthly sales.
 
-- Provide assortment breadth
+## Cluster Insights: Moderate-Moving (Cluster 3) {.smaller}
 
-- Steady revenue stream
+**Role & characteristics:**
 
-Management actions:
+- Provide assortment breadth to accommodate varied customer tastes
 
-- Balanced safety stock
+- Generate steady, reliable revenue
 
-Regular review of trends
+- Show consistent demand with fewer extreme peaks or drops
 
-- Adjust assortment based on performance
+**Management actions:**
+
+- Maintain balanced safety stock—not excessive, but sufficient to avoid shortages
+
+- Conduct regular performance reviews to detect upward or downward trends
+
+- Adjust assortment and marketing strategies based on performance signals
 
 ## Conclusion: Key Findings {.smaller}
 
-K-Means with K = 3 produced three meaningful clusters:
+K-Means clustering with K = 3 successfully segmented retail items into Fast-Moving, Moderate-Moving, and Slow-Moving groups.
+The analysis showed strong alignment between statistical patterns and real-world retail behavior:
 
-- Cluster 1: Fast-moving items
+- Cluster 1 captured the high-demand, high-revenue items that drive operational performance
 
-- Cluster 2: Slow-moving items
+- Cluster 2 contained low-selling items that require cost control and strategic review
 
-- Cluster 3: Moderate-moving items
+- Cluster 3 represented stable, moderate performers that support consistent sales
 
-Seasonal patterns and supplier concentration strongly affect sales.
-
-Clustering turned a large, complex dataset into three clear groups
-that managers can use for decision-making.
+Seasonal peaks (especially summer and December) and supplier concentration patterns further validated the cluster interpretations.
+Overall, clustering simplified a large and complex dataset into three clear categories that directly support business decision-making.
 
 ## Conclusion: Managerial Implications {.smaller}
-Focus on:
+This clustering framework provides actionable guidance for retail managers:
 
-- Fast-moving items → avoid stock-outs.
+- Fast-moving items: Prioritize to prevent stock-outs and protect revenue.
 
-- Moderate-moving items → maintain stable levels.
+- Moderate-moving items: Maintain stable inventory and monitor for performance changes.
 
-- Slow-moving items → control inventory and reduce waste.
+- Slow-moving items: Evaluate carefully to reduce waste, lower holding costs, and free shelf space.
 
-Using K-Means for inventory:
+Implementing K-Means clustering as part of inventory analytics helps retailers:
 
-- Improves planning and forecasting
+- Strengthen forecasting accuracy
 
-- Supports data-driven retail strategy
+- Improve inventory planning and allocation
 
-- Reduces risk of overstock and lost sales
+- Reduce overstock and lost-sales risks
+
+- Build a data-driven retail strategy grounded in objective performance patterns
+
+Through this approach, retailers can better align supply with actual demand and enhance overall operational efficiency.
+
+## Business Value {.smaller}
+
+Using K-Means clustering on open government sales data:
+
+Helps managers:
+
+- Prioritize fast movers for availability and service level.
+
+- Maintain balanced stocks for moderate movers.
+
+- Control costs and space taken by slow movers.
+
+Supports:
+
+- Better demand forecasting
+
+- More efficient inventory control
+
+- Data-driven promotion and assortment decisions
+
+Overall, clustering turns raw sales data into clear, actionable categories for retail decision-making.
+
+## Limitations & Future Work {.smaller}
+
+**Limitations:**
+
+K-Means assumes spherical clusters and is sensitive to:
+
+- Initial centroids
+
+- Outliers and extreme values
+
+The analysis uses only sales volume features (TOTAL, RETAIL, WAREHOUSE);
+
+- No price elasticity, margin, or detailed customer behavior included.
+
+**Future Work:**
+
+- Experiment with other clustering algorithms (e.g., DBSCAN, hierarchical).
+
+- Include profit/margin, seasonality features, or RFM-style metrics.
+
+- Explore weighted K-Means or hybrid models to handle skewed distributions.
+
+- Extend analysis to customer-level clustering using the same dataset.
 
 ## References {.smaller}

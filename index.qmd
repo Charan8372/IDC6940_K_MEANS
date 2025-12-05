@@ -28,8 +28,7 @@ editor:
     wrap: 72
 ---
 
-Slides: [slides.html](slides.html){target="_blank"} ( Go to `slides.qmd`
-to edit)
+Slides: [Presentation](slides.html){target="_blank"} 
 
 # Introduction
 
@@ -307,234 +306,7 @@ The dataset is updated regularly and published under a Public Domain
 License, supporting transparency in local government operations and
 enabling reproducible business analytics research.
 
-## Data Preprocessing
 
-Before applying K-Means, the dataset was cleaned, aggregated, and
-transformed to ensure accurate clustering performance. The original
-retail dataset contained monthly-level sales for each supplier, item
-code, and sales channel (retail, transfers, warehouse). These records
-were aggregated to the item level, creating a single row per
-supplier-item combination with total sales, retail sales, and warehouse
-sales.
-
-Missing values were replaced with zeros where appropriate, duplicates
-were removed, and a new TOTAL_SALES variable was created by combining
-all three sales channels. Only items with at least some sales activity
-were retained. Finally, numerical variables used for clustering were
-standardized to remove scale differences between retail and warehouse
-sales.
-
-This preprocessing ensured that the clustering model was applied to
-cleaned, consistent, and comparable data.
-
-```{r}
-library(tidyverse)
-library(readxl)
-library(lubridate)
-library(cluster)    # for silhouette()
-library(factoextra) # for convenient plots (optional)
-library(scales)   
-
-# Read Excel file
-retail_raw <- read_excel("Retail_Sales.xlsx")
-
-# Aggregate to item level: one row per supplier-item
-items <- retail_raw %>%
-  group_by(SUPPLIER, `ITEM CODE`, `ITEM DESCRIPTION`, `ITEM TYPE`) %>%
-  summarise(
-    RETAIL_SALES     = sum(`RETAIL SALES`, na.rm = TRUE),
-    RETAIL_TRANSFERS = sum(`RETAIL TRANSFERS`, na.rm = TRUE),
-    WAREHOUSE_SALES  = sum(`WAREHOUSE SALES`, na.rm = TRUE),
-    .groups = "drop"
-  ) %>%
-  mutate(
-    TOTAL_SALES = RETAIL_SALES + RETAIL_TRANSFERS + WAREHOUSE_SALES
-  ) %>%
-  filter(TOTAL_SALES > 0)  # keep only items that actually sold something
-
-# Numeric features for clustering
-features <- items %>%
-  select(TOTAL_SALES, RETAIL_SALES, WAREHOUSE_SALES)
-
-# Scale features
-features_scaled <- scale(features)
-```
-
-## Elbow Method Code
-
-The Elbow Method was used to evaluate different values of 𝐾 by
-calculating the Within-Cluster Sum of Squares (WCSS) for 𝐾=2 through
-𝐾=8. The Elbow plot shows how much WCSS decreases as the number of
-clusters increases. A sharp drop is usually followed by a flattening of
-the curve—this “elbow” indicates a good balance between simplicity and
-accuracy.
-
-```{r}
-set.seed(123)
-
-k_values <- 2:8
-
-wcss <- map_dbl(k_values, function(k) {
-  kmeans(features_scaled, centers = k, nstart = 10)$tot.withinss
-})
-
-elbow_df <- tibble(
-  k = k_values,
-  WCSS = wcss
-)
-
-ggplot(elbow_df, aes(x = k, y = WCSS)) +
-  geom_line() +
-  geom_point() +
-  labs(
-    title = "Elbow Plot for Choosing K",
-    x = "Number of Clusters (K)",
-    y = "Total Within-Cluster Sum of Squares (WCSS)"
-  ) +
-  theme_minimal()
-```
-
-The WCSS curve showed a clear bend at 𝐾=3. Beyond three clusters, the
-reduction in WCSS became minimal, suggesting that additional clusters
-would not significantly improve separation. This result supports
-choosing three clusters as an appropriate and efficient segmentation of
-the retail items.
-
-Thus, based on WCSS patterns, 𝐾=3 provides a meaningful structure with
-minimal unnecessary complexity.
-
-## Silhouette Method
-
-To validate the Elbow Method, a Silhouette analysis was performed for
-𝐾=3. The Silhouette score measures how close each item is to its own
-cluster compared to other clusters. Values close to +1 indicate strong
-cohesion within clusters and clear separation between them.
-
-```{r}
-set.seed(123)
-
-# Fit K-Means with K = 3
-k <- 3
-k3_model <- kmeans(features_scaled, centers = k, nstart = 25)
-
-# Silhouette object
-sil_obj <- silhouette(k3_model$cluster, dist(features_scaled))
-
-# Average silhouette width (you can quote this number in your text)
-mean_silhouette <- mean(sil_obj[, "sil_width"])
-mean_silhouette
-
-# Plot silhouette for K = 3
-fviz_silhouette(sil_obj) +
-  labs(title = "Silhouette Plot for K = 3")
-```
-
-The overall average Silhouette score was approximately 0.97, which
-indicates excellent clustering performance. Cluster 2 had a Silhouette
-width of 0.98, showing extremely tight grouping and strong separation —
-consistent with its large count of low-sales items. Clusters 1 and 3 had
-lower Silhouette values (0.19 and 0.09), which is expected for smaller
-high-value and mid-value groups that lie further away from the large
-slow-moving cluster.
-
-The very high overall Silhouette score confirms that 𝐾=3 forms
-well-separated and meaningful clusters.
-
-## Cluster Profiling(Sizes + Centroids + Summary)
-
-Once clustering was completed, the characteristics of each cluster were
-examined using the cluster sizes, centroid values (scaled units), and
-summary statistics (original units). This profiling step helps translate
-numerical cluster assignments into meaningful business categories.
-
-```{r}
-# Add cluster labels back to item data
-items_clustered <- items %>%
-  mutate(cluster = factor(k3_model$cluster))
-```
-
-```{r}
-# Cluster sizes (how many items in each cluster)
-cluster_sizes <- items_clustered %>%
-  count(cluster)
-
-cluster_sizes
-```
-
-The cluster size results showed a very uneven distribution:
-
--   Cluster 1: 17 items
-
--   Cluster 2: 37,667 items
-
--   Cluster 3: 240 items
-
-```{r}
-# Centroids on scaled features (for technical report)
-cluster_centroids_scaled <- as_tibble(k3_model$centers) %>%
-  mutate(cluster = factor(1:3))
-
-cluster_centroids_scaled
-```
-
-```{r}
-
-# Summary stats in original units (mean and median)
-cluster_summary <- items_clustered %>%
-  group_by(cluster) %>%
-  summarise(
-    mean_total_sales   = mean(TOTAL_SALES, na.rm = TRUE),
-    median_total_sales = median(TOTAL_SALES, na.rm = TRUE),
-    mean_retail_sales  = mean(RETAIL_SALES, na.rm = TRUE),
-    mean_wh_sales      = mean(WAREHOUSE_SALES, na.rm = TRUE),
-    .groups = "drop"
-  )
-
-cluster_summary
-```
-
-The centroids and averages revealed that:
-
--   Cluster 1 has the highest total sales (≈139,000 on average), making
-    it the Fast-Moving cluster.
-
--   Cluster 2 has very low total sales (≈155), representing Slow-Moving
-    items.
-
--   Cluster 3 shows moderate total sales (≈16,695), identifying it as
-    the Moderate-Moving cluster.
-
-This three-group structure matches typical inventory movement patterns
-in retail and aligns with managerial frameworks for stock
-classification. The profiling confirms that K-Means successfully
-distinguished high-demand items from mid-level and slow-moving products.
-
-## Cluster Visualization: Scatter Plot
-
-```{r}
-ggplot(items_clustered,
-       aes(x = WAREHOUSE_SALES,
-           y = TOTAL_SALES,
-           color = cluster)) +
-  geom_point(alpha = 0.5, size = 1) +
-  scale_x_continuous(labels = scales::comma) +
-  scale_y_continuous(labels = scales::comma) +
-  labs(
-    title = "K-Means Clusters (K = 3)",
-    x = "Warehouse Sales",
-    y = "Total Sales",
-    color = "Cluster"
-  ) +
-  theme_minimal()
-```
-
-**Interpretation**
-
--   Cluster 1: points in high-sales region → Fast-Moving.
-
--   Cluster 2: dense cloud near origin → Slow-Moving.
-
--   Cluster 3: middle zone → Moderate-Moving.
 
 ## Exploratory Analysis
 
@@ -748,22 +520,299 @@ lower sales, while anomalies in 2020 point to potential outside
 interruptions such as the COVID-19 pandemic. Planning stock levels
 around seasonal trends is made easier by identifying these patterns.
 
+## Visualization-Based Evidence
+
+1.**Top Suppliers by Total Sales:**A bar chart of total sales by
+supplier showed that companies such as Crown Imports, Miller Brewing
+Company, and Anheuser Busch Inc. account for a large share of overall
+revenue. Many of their key products fall into Cluster 1 (Fast-Moving),
+which is consistent with the very high total sales and strong warehouse
+movement observed in that cluster. In contrast, smaller suppliers tend
+to have more products in Cluster 2 (Slow-Moving) or Cluster 3
+(Moderate-Moving).
+
+2.**Total Sales by Item Type:**The visualization of total sales by item
+type showed that beer dominates total sales, followed by liquor and
+wine. Fast-moving items in Cluster 1 are heavily concentrated in
+high-volume categories like beer and popular liquor brands. Cluster 3
+(Moderate-Moving) contains many wine and mid-tier products with steady
+but lower sales. Categories such as kegs, dunnage, and non-alcoholic
+items are more frequently found in Cluster 2 (Slow-Moving), reflecting
+their low or irregular turnover.
+
+3.**Retail vs Warehouse Sales:** When comparing total retail and
+warehouse sales, we see that warehouse sales (\~\$7.8M) are much larger
+than retail sales (\~\$2.1M). Items in Cluster 1 (Fast-Moving) tend to
+have high warehouse sales and noticeable retail movement, indicating
+that these products are stocked in bulk to meet continuous demand. Items
+in Cluster 3 (Moderate-Moving) show mid-level warehouse and retail
+sales. Many items in Cluster 2 (Slow-Moving) have low values in both
+channels and appear only occasionally in sales records.
+
+4.**Heatmap of Monthly Sales:** A monthly heatmap of sales activity
+shows that fast-moving items (Cluster 1) have strong seasonal peaks,
+especially in summer and December, but also maintain significant
+baseline sales throughout the year. Moderate-moving items (Cluster 3)
+show smoother, stable patterns across months. Slow-moving items (Cluster
+2) exhibit many months with very low or zero sales, with only occasional
+spikes. The irregular behavior in 2020 suggests potential external
+influences such as COVID-19.
+
+Together, these visual patterns align well with the numeric cluster
+profiles and strengthen the interpretation of Clusters 1, 2, and 3 as
+fast, slow, and moderate moving groups.
+
+
 # Modeling and Results
 
 ## Modeling and Data Preparation
 
-In order to eliminate duplicates, fill in missing values, and normalize
-variables for analysis, the Montgomery County retail dataset performed
-preprocessing. Retail, warehouse, and transfer sales were combined to
-produce a new Total Sales feature that made sure every record
-represented all transaction activity. The important quantitative
-variables—Total Sales, Retail Sales, and Warehouse Sales—were then
-grouped based on their sales volume and consistency using K-Means
-clustering.
+Before building the K-Means model, the dataset was prepared to ensure that all items were represented accurately and consistently. Duplicate records were removed, missing values were handled, and sales from the three channels—retail, warehouse, and retail transfers—were combined into a single TOTAL_SALES measure to capture complete item performance. These cleaned and consolidated variables formed the foundation for clustering.
 
-K = 3 was found to be the ideal number of clusters using the Elbow and
-Silhouette methods, creating three separate groups that represented
-Fast-Moving, Moderate-Moving, and Slow-Moving objects.
+To select the appropriate number of clusters, both the Elbow Method and Silhouette Method were applied. Both techniques consistently indicated K = 3, which aligns with common retail inventory categories—Fast-Moving, Moderate-Moving, and Slow-Moving items. With this choice of K, the dataset was ready for clustering using standardized sales variables.
+
+## Data Preprocessing
+
+The raw Montgomery County retail dataset contained monthly-level sales records for each supplier, item, and sales channel. To make the data usable for K-Means, several preprocessing steps were carried out:
+
+- **Aggregation**: Monthly records were aggregated to create one row per supplier–item combination, summing Retail Sales, Retail Transfers, and Warehouse Sales.
+
+- **Feature Creation**: A new TOTAL_SALES variable was generated to represent complete sales activity.
+
+- **Missing Values**: Missing numeric sales values were replaced with zeros where appropriate.
+
+- **Deduplication**: Duplicate entries were removed to avoid inflating certain items.
+
+- **Filtering**: Items with no sales activity were excluded from modeling.
+
+- **Standardization**: The numeric variables used for clustering—TOTAL_SALES, RETAIL_SALES, and WAREHOUSE_SALES—were standardized so that differences in scale did not affect distance calculations.
+
+These preprocessing steps ensured that the final dataset was clean, consolidated, and suitable for meaningful cluster formation.
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+library(cluster)    # for silhouette()
+library(factoextra) # for convenient plots (optional)
+library(scales)   
+
+# Read Excel file
+retail_raw <- read_excel("Retail_Sales.xlsx")
+
+# Aggregate to item level: one row per supplier-item
+items <- retail_raw %>%
+  group_by(SUPPLIER, `ITEM CODE`, `ITEM DESCRIPTION`, `ITEM TYPE`) %>%
+  summarise(
+    RETAIL_SALES     = sum(`RETAIL SALES`, na.rm = TRUE),
+    RETAIL_TRANSFERS = sum(`RETAIL TRANSFERS`, na.rm = TRUE),
+    WAREHOUSE_SALES  = sum(`WAREHOUSE SALES`, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    TOTAL_SALES = RETAIL_SALES + RETAIL_TRANSFERS + WAREHOUSE_SALES
+  ) %>%
+  filter(TOTAL_SALES > 0)  # keep only items that actually sold something
+
+# Numeric features for clustering
+features <- items %>%
+  select(TOTAL_SALES, RETAIL_SALES, WAREHOUSE_SALES)
+
+# Scale features
+features_scaled <- scale(features)
+```
+
+## Elbow Method Code
+
+The Elbow Method was used to evaluate different values of 𝐾 by
+calculating the Within-Cluster Sum of Squares (WCSS) for 𝐾=2 through
+𝐾=8. The Elbow plot shows how much WCSS decreases as the number of
+clusters increases. A sharp drop is usually followed by a flattening of
+the curve—this “elbow” indicates a good balance between simplicity and
+accuracy.
+
+```{r}
+set.seed(123)
+
+k_values <- 2:8
+
+wcss <- map_dbl(k_values, function(k) {
+  kmeans(features_scaled, centers = k, nstart = 10)$tot.withinss
+})
+
+elbow_df <- tibble(
+  k = k_values,
+  WCSS = wcss
+)
+
+ggplot(elbow_df, aes(x = k, y = WCSS)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Elbow Plot for Choosing K",
+    x = "Number of Clusters (K)",
+    y = "Total Within-Cluster Sum of Squares (WCSS)"
+  ) +
+  theme_minimal()
+```
+
+The WCSS curve showed a clear bend at 𝐾=3. Beyond three clusters, the
+reduction in WCSS became minimal, suggesting that additional clusters
+would not significantly improve separation. This result supports
+choosing three clusters as an appropriate and efficient segmentation of
+the retail items.
+
+Thus, based on WCSS patterns, 𝐾=3 provides a meaningful structure with
+minimal unnecessary complexity.
+
+## Silhouette Method
+
+To validate the Elbow Method, a Silhouette analysis was performed for
+𝐾=3. The Silhouette score measures how close each item is to its own
+cluster compared to other clusters. Values close to +1 indicate strong
+cohesion within clusters and clear separation between them.
+
+```{r}
+set.seed(123)
+
+# Fit K-Means with K = 3
+k <- 3
+k3_model <- kmeans(features_scaled, centers = k, nstart = 25)
+
+# Silhouette object
+sil_obj <- silhouette(k3_model$cluster, dist(features_scaled))
+
+# Average silhouette width (you can quote this number in your text)
+mean_silhouette <- mean(sil_obj[, "sil_width"])
+mean_silhouette
+
+# Plot silhouette for K = 3
+fviz_silhouette(sil_obj) +
+  labs(title = "Silhouette Plot for K = 3")
+```
+
+The overall average Silhouette score was approximately 0.97, which
+indicates excellent clustering performance. Cluster 2 had a Silhouette
+width of 0.98, showing extremely tight grouping and strong separation —
+consistent with its large count of low-sales items. Clusters 1 and 3 had
+lower Silhouette values (0.19 and 0.09), which is expected for smaller
+high-value and mid-value groups that lie further away from the large
+slow-moving cluster.
+
+The very high overall Silhouette score confirms that 𝐾=3 forms
+well-separated and meaningful clusters.
+
+## Cluster Profiling(Sizes + Centroids + Summary)
+
+Once clustering was completed, the characteristics of each cluster were
+examined using the cluster sizes, centroid values (scaled units), and
+summary statistics (original units). This profiling step helps translate
+numerical cluster assignments into meaningful business categories.
+
+```{r}
+# Add cluster labels back to item data
+items_clustered <- items %>%
+  mutate(cluster = factor(k3_model$cluster))
+```
+
+```{r}
+# Cluster sizes (how many items in each cluster)
+cluster_sizes <- items_clustered %>%
+  count(cluster)
+
+cluster_sizes
+```
+
+The cluster size results showed a very uneven distribution:
+
+-   Cluster 1: 17 items
+
+-   Cluster 2: 37,667 items
+
+-   Cluster 3: 240 items
+
+```{r}
+# Centroids on scaled features (for technical report)
+cluster_centroids_scaled <- as_tibble(k3_model$centers) %>%
+  mutate(cluster = factor(1:3))
+
+cluster_centroids_scaled
+```
+
+```{r}
+
+# Summary stats in original units (mean and median)
+cluster_summary <- items_clustered %>%
+  group_by(cluster) %>%
+  summarise(
+    mean_total_sales   = mean(TOTAL_SALES, na.rm = TRUE),
+    median_total_sales = median(TOTAL_SALES, na.rm = TRUE),
+    mean_retail_sales  = mean(RETAIL_SALES, na.rm = TRUE),
+    mean_wh_sales      = mean(WAREHOUSE_SALES, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+cluster_summary
+```
+
+The centroids and averages revealed that:
+
+-   Cluster 1 has the highest total sales (≈139,000 on average), making
+    it the Fast-Moving cluster.
+
+-   Cluster 2 has very low total sales (≈155), representing Slow-Moving
+    items.
+
+-   Cluster 3 shows moderate total sales (≈16,695), identifying it as
+    the Moderate-Moving cluster.
+
+This three-group structure matches typical inventory movement patterns
+in retail and aligns with managerial frameworks for stock
+classification. The profiling confirms that K-Means successfully
+distinguished high-demand items from mid-level and slow-moving products.
+
+## Cluster Visualization: Scatter Plot
+
+```{r}
+ggplot(items_clustered,
+       aes(x = WAREHOUSE_SALES,
+           y = TOTAL_SALES,
+           color = cluster)) +
+  geom_point(alpha = 0.5, size = 1.1) +
+  
+  # X-axis: log10, start at 100, no gap
+  scale_x_log10(
+    labels = scales::comma,
+    limits = c(100, NA),
+    expand = c(0, 0)   # <-- removes the gap at the axis
+  ) +
+  
+  # Y-axis: log10, start at 100, no gap
+  scale_y_log10(
+    labels = scales::comma,
+    limits = c(100, NA),
+    expand = c(0, 0)   # <-- removes the gap at the axis
+  ) +
+  
+  labs(
+    title = "K-Means Clusters",
+    x = "Warehouse Sales",
+    y = "Total Sales",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+```
+
+**Interpretation**
+
+-   Cluster 1: points in high-sales region → Fast-Moving.
+
+-   Cluster 2: dense cloud near origin → Slow-Moving.
+
+-   Cluster 3: middle zone → Moderate-Moving.
+
+
+
 
 ## Cluster Formation and Categorization
 
@@ -807,47 +856,6 @@ This structure matches the typical inventory classification into fast-,
 moderate-, and slow-moving items and confirms that K-Means is capturing
 meaningful differences in sales behavior.
 
-## Visualization-Based Evidence
-
-1.**Top Suppliers by Total Sales:**A bar chart of total sales by
-supplier showed that companies such as Crown Imports, Miller Brewing
-Company, and Anheuser Busch Inc. account for a large share of overall
-revenue. Many of their key products fall into Cluster 1 (Fast-Moving),
-which is consistent with the very high total sales and strong warehouse
-movement observed in that cluster. In contrast, smaller suppliers tend
-to have more products in Cluster 2 (Slow-Moving) or Cluster 3
-(Moderate-Moving).
-
-2.**Total Sales by Item Type:**The visualization of total sales by item
-type showed that beer dominates total sales, followed by liquor and
-wine. Fast-moving items in Cluster 1 are heavily concentrated in
-high-volume categories like beer and popular liquor brands. Cluster 3
-(Moderate-Moving) contains many wine and mid-tier products with steady
-but lower sales. Categories such as kegs, dunnage, and non-alcoholic
-items are more frequently found in Cluster 2 (Slow-Moving), reflecting
-their low or irregular turnover.
-
-3.**Retail vs Warehouse Sales:** When comparing total retail and
-warehouse sales, we see that warehouse sales (\~\$7.8M) are much larger
-than retail sales (\~\$2.1M). Items in Cluster 1 (Fast-Moving) tend to
-have high warehouse sales and noticeable retail movement, indicating
-that these products are stocked in bulk to meet continuous demand. Items
-in Cluster 3 (Moderate-Moving) show mid-level warehouse and retail
-sales. Many items in Cluster 2 (Slow-Moving) have low values in both
-channels and appear only occasionally in sales records.
-
-4.**Heatmap of Monthly Sales:** A monthly heatmap of sales activity
-shows that fast-moving items (Cluster 1) have strong seasonal peaks,
-especially in summer and December, but also maintain significant
-baseline sales throughout the year. Moderate-moving items (Cluster 3)
-show smoother, stable patterns across months. Slow-moving items (Cluster
-2) exhibit many months with very low or zero sales, with only occasional
-spikes. The irregular behavior in 2020 suggests potential external
-influences such as COVID-19.
-
-Together, these visual patterns align well with the numeric cluster
-profiles and strengthen the interpretation of Clusters 1, 2, and 3 as
-fast, slow, and moderate moving groups.
 
 ## Cluster Insights
 
