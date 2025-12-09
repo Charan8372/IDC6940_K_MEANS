@@ -5,6 +5,8 @@ author: "Charan Gullipalli, Lavanya Guntupalli, Arun Pandian  (Advisor: Dr. Cohe
 date: '`r Sys.Date()`'
 format:
   revealjs
+      
+   
 course: Capstone Projects in Data Science
 bibliography: references.bib # file contains bibtex for references
 #always_allow_html: true # this allows to get PDF with HTML features
@@ -16,7 +18,15 @@ editor:
   markdown: 
     wrap: 72
 ---
+<style>
+.reveal {
+  background-color: #ADD8E6 !important;  /* sky blue */
+}
 
+.reveal .slide-background {
+  background-color: #ADD8E6 !important;  /* sky blue */
+}
+</style>
 ## Introduction {.smaller}
 
 Retail businesses generate massive amounts of sales and customer data.
@@ -188,7 +198,7 @@ $$
 ## Methods: Choosing K {.smaller}
 
 **Calinski–Harabasz Index** Measures how well clusters are formed by
-comparing:
+comparing:(@Calinski1974)
 
 -   Between-cluster variance (how far clusters are from each other)
 
@@ -584,7 +594,49 @@ ggplot(data, aes(x = `ITEM TYPE`, y = TOTAL_SALES, fill = `ITEM TYPE`)) +
 
 - Kegs and non-alcoholic products → slow-moving side.
 
+## Exploratory Analysis:Retail vs Warehouse Sales {.smaller}
 
+```{r}
+# Comparison: Retail vs Warehouse Sales
+
+sales_compare <- data %>%
+  summarise(
+    Retail_Sales = sum(`RETAIL SALES`, na.rm = TRUE),
+    Warehouse_Sales = sum(`WAREHOUSE SALES`, na.rm = TRUE)
+  ) %>%
+  tidyr::pivot_longer(cols = everything(), names_to = "Category", values_to = "Sales")
+
+ggplot(sales_compare, aes(x = Category, y = Sales, fill = Category)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Retail vs Warehouse Sales", x = "", y = "Sales") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+**Key takeaway**
+
+- Warehouse sales are nearly three times higher than retail sales, according to the data.  Merchandise is typically distributed in bulk through centralized channels rather than being sold directly to clients.  While this structure increases productivity, it requires careful inventory balance to avoid overstocking.
+
+## Exploratory Analysis:Monthly Sales Heatmap {.smaller}
+
+```{r}
+# Monthly Sales Heatmap
+library(viridis)
+
+monthly_sales <- data %>%
+  group_by(YEAR, MONTH) %>%
+  summarise(Total_Sales = sum(TOTAL_SALES, na.rm = TRUE))
+
+ggplot(monthly_sales, aes(x = factor(MONTH), y = factor(YEAR), fill = Total_Sales)) +
+  geom_tile() +
+  scale_fill_viridis(option = "magma", direction = -1, labels = comma) +
+  labs(title = "Monthly Sales Heatmap", x = "Month", y = "Year", fill = "Total Sales") +
+  theme_minimal()
+```
+**Key takeaway**
+
+- Sales peak in summer and December due to seasonal and holiday demand, while early months show lower activity. Unusual patterns in 2020 suggest external disruptions like COVID-19. Recognizing these seasonal shifts helps optimize inventory planning.
 
 
 ## Cluster Insights:Fast-Moving(Cluster 1) {.smaller}
@@ -706,28 +758,21 @@ Supports:
 
 Overall, clustering turns raw sales data into clear, actionable categories for retail decision-making.
 
-## Limitations & Future Work {.smaller}
+## Limitations  {.smaller}
 
-**Limitations:**
+**Cluster Size Imbalance:**One drawback is that Cluster 2 is significantly larger than Clusters 1 and 3.  This reflects the fact that most retail items move slowly, but it also indicates that the clustering structure is severely uneven.  This could affect how well the smaller high-value clusters are represented.
 
-K-Means assumes spherical clusters and is sensitive to:
+**K-Means Assumptions:**K-Means assumes spherical, uniformly sized clusters and is sensitive to initial centroid location and outliers.  Given the skewed distribution of retail sales data, these assumptions may not always be valid.
 
-- Initial centroids
+**Limited Feature Set:**The analysis only considers sales-related factors (total sales, retail sales, and warehouse sales).  Important business parameters, such as profit margin, price elasticity, promotional activity, consumer demographics, and item lifetime, were not considered and could have an impact on cluster formation.
 
-- Outliers and extreme values
+##  Future Work {.smaller}
+**Test Alternative Clustering Algorithms:**Investigate models that can handle skewed and imbalanced data, such as DBSCAN, Gaussian Mixture Models, and hierarchical clustering, to see if a more balanced segmentation emerges.
 
-The analysis uses only sales volume features (TOTAL, RETAIL, WAREHOUSE);
+**Add more business features:**Use margin, profitability, seasonality indications, promotions, or RFM-style customer KPIs to create clusters that reflect both sales volume and business value.
 
-- No price elasticity, margin, or detailed customer behavior included.
+**Try Weighted or Hybrid models:**Consider weighted K-Means, MiniBatch K-Means, or hybrid models to reduce sensitivity to extreme values and improve resilience.
 
-**Future Work:**
-
-- Experiment with other clustering algorithms (e.g., DBSCAN, hierarchical).
-
-- Include profit/margin, seasonality features, or RFM-style metrics.
-
-- Explore weighted K-Means or hybrid models to handle skewed distributions.
-
-- Extend analysis to customer-level clustering using the same dataset.
+**Extend to customer-level clustering:**Using the same dataset, cluster consumer behavior (frequency, recency, spend, brand loyalty) to supplement product-level segmentation.
 
 ## References {.smaller}

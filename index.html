@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Charan Gullipalli, Lavanya Guntupalli, Arun Pandian (Advisor: Dr. Cohen)">
-<meta name="dcterms.date" content="2025-12-04">
+<meta name="dcterms.date" content="2025-12-09">
 
 <title>Applying K-Means Clustering in retail industry</title>
 <style>
@@ -3276,6 +3276,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings"><span class="header-section-number">5.1</span> Key Findings</a></li>
   <li><a href="#results-summary" id="toc-results-summary" class="nav-link" data-scroll-target="#results-summary"><span class="header-section-number">5.2</span> Results Summary</a></li>
+  <li><a href="#limitations-and-future-work" id="toc-limitations-and-future-work" class="nav-link" data-scroll-target="#limitations-and-future-work"><span class="header-section-number">5.3</span> Limitations and Future Work</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -3301,7 +3302,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 4, 2025</p>
+      <p class="date">December 9, 2025</p>
     </div>
   </div>
   
@@ -3316,82 +3317,83 @@ window.Quarto = {
 <p>Slides: <a href="slides.html" target="_blank">Presentation</a></p>
 <section id="introduction" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
-<p>In today’s data-driven corporate environment, understanding customer behavior and effectively managing inventories are key to organizational success. With the increased availability of transactional, demographic, and behavioral data, data mining and clustering techniques—particularly K-Means clustering—have become critical decision-making tools in retail, logistics, and marketing. Recent studies emphasize that algorithm selection and data preprocessing directly affect the quality of insights derived from clustering (<span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>).</p>
-<p>K-Means clustering is a machine learning technique that divides data into distinct clusters based on similarities, allowing businesses to identify patterns that would not be visible using traditional analysis. Research has demonstrated that it can greatly enhance consumer segmentation, inventory forecasting, and marketing optimization across various industries. For example, a weighted K-Means model produced more meaningful and stable customer clusters compared to the standard model (<span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span>). Similarly, comparative work on the same dataset found that while more complex models can sometimes yield higher precision, K-Means remains valuable for its interpretability and speed in operational settings (<span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>).</p>
-<p>In emerging markets, K-Means has also proven beneficial for small and resource-limited businesses. Clustering transactional and demographic data enables grocery stores to identify clear patterns of consumer purchasing behavior (<span class="citation" data-cites="sitorus2023inventory">Sitorus et al. (<a href="#ref-sitorus2023inventory" role="doc-biblioref">2023</a>)</span>). Likewise, studies show that clustering supports targeted marketing, loyalty programs, and more efficient stock management (<span class="citation" data-cites="bala2012forecast">Bala (<a href="#ref-bala2012forecast" role="doc-biblioref">2012</a>)</span>). Collectively, these works underscore that even small or localized retailers can leverage K-Means-based segmentation to align supply, demand, and promotional strategy.</p>
-<p>Beyond retail, advances in clustering algorithms—including weighted variants (<span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span>) as well as Global and MiniBatch K-Means—have improved computational efficiency and accuracy, reducing issues like random initialization and scalability on large datasets. However, many studies still under-specify preprocessing choices, do not rigorously validate cluster quality, or rely on proprietary datasets that are not easily reproducible.</p>
-<p>This study addresses these gaps by applying K-Means clustering to an open, government retail dataset and by explicitly documenting:</p>
+<p>In today’s data-driven corporate world, knowing customer behavior and properly controlling inventory are crucial for organizational success. Data mining and clustering techniques, such as K-Means clustering, are crucial decision-making tools in retail, logistics, and marketing due to increasing access to transactional, demographic, and behavioral data. Recent studies show that algorithm selection and data pretreatment have a direct impact on the quality of clustering insights (<span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>).</p>
+<p>K-Means clustering is a machine learning technique that splits data into distinct clusters based on similarities. This allows firms to uncover patterns that may not be obvious through traditional analysis. Research shows that it can significantly improve consumer segmentation, inventory forecasting, and marketing optimization across industries. A weighted K-Means model yielded more meaningful and stable customer clusters than the usual model (<span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span>). A review by <span class="citation" data-cites="prasetiya2025">(<a href="#ref-prasetiya2025" role="doc-biblioref"><strong>prasetiya2025?</strong></a>)</span> concluded that K-Means is still useful in operational contexts due to its interpretability and rapidity, even though more complex models may provide higher precision (source).</p>
+<p>K-Means has helped small enterprises with minimal resources in emerging countries. Clustering transactional and demographic data helps grocery shops detect patterns in consumer shopping behavior (<span class="citation" data-cites="sitorus2023inventory">Sitorus et al. (<a href="#ref-sitorus2023inventory" role="doc-biblioref">2023</a>)</span>). Research indicates that clustering can improve targeted marketing, loyalty programs, and stock management (<span class="citation" data-cites="bala2012forecast">Bala (<a href="#ref-bala2012forecast" role="doc-biblioref">2012</a>)</span>). These studies show that K-Means-based segmentation can help small merchants coordinate supply, demand, and promotional strategies.</p>
+<p>Clustering methods, such as weighted variants (<span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span>) and Global and MiniBatch K-Means, have increased computing efficiency and accuracy, addressing concerns like random initialization and scalability on big datasets. Many research lack clear preprocessing choices, fail to evaluate cluster quality, or use proprietary datasets that are difficult to replicate.</p>
+<p>This study uses K-Means clustering to resolve gaps in an open government retail dataset and includes comprehensive documentation.</p>
 <ul>
-<li><p>The data cleaning and feature engineering steps,</p></li>
-<li><p>The selection of the optimal number of clusters using both statistical and managerial criteria, and</p></li>
-<li><p>The validation of the resulting clusters using internal evaluation indices.</p></li>
+<li><p>Steps for data cleaning and feature engineering</p></li>
+<li><p>Determine the ideal number of clusters based on statistical and managerial criteria.</p></li>
+<li><p>Validate the clusters using internal evaluation indices.</p></li>
 </ul>
-<p>In summary, K-Means clustering is more than a statistical technique; it is a strategic enabler for data-informed decision-making. By uncovering relevant behavioral patterns in large datasets, firms can deepen customer understanding, optimize resource allocation, and forecast demand more accurately. Integrating K-Means into corporate analytics frameworks is thus a crucial step toward operational excellence and maintaining competitiveness in the digital economy.</p>
+<p>K-Means clustering is more than just a statistical technique; it’s a strategic tool for data-driven decisions. Identifying behavioral patterns in huge datasets can help organizations improve customer understanding, optimize resource allocation, and estimate demand more precisely. Integrating K-Means into corporate analytics frameworks is vital for operational excellence and competitiveness in the digital age.</p>
 <section id="literature-review" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="literature-review"><span class="header-section-number">1.1</span> Literature Review</h2>
-<p>Research shows that K-Means clustering is widely used in retail to improve customer segmentation and inventory forecasting. According to <span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>, studies between 2019–2024 identified that combining K-Means with association rule learning (like FP-Growth) helps retailers better understand customer behavior and create focused marketing campaigns. The review also highlights that K-Means performs reliably on large datasets and can be applied to classify products by sales speed — such as fast-moving and slow-moving goods.</p>
-<p><span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span> applied K-Means clustering to grocery stores in Kenya using transactional and demographic data. Their study showed that age and income strongly influence shopping behavior. Retailers could use this information to manage inventory and target marketing efforts more effectively.</p>
-<p><span class="citation" data-cites="bala2012forecast">Bala (<a href="#ref-bala2012forecast" role="doc-biblioref">2012</a>)</span> introduced a forecasting model combining clustering and demand prediction. This approach improved inventory accuracy, reduced excess stock, and minimized shortages — showing that clustering can make supply chains leaner and more efficient. Similarly, <span class="citation" data-cites="sitorus2023inventory">Sitorus et al. (<a href="#ref-sitorus2023inventory" role="doc-biblioref">2023</a>)</span> used K-Means to group products by demand at a retail store and identified three categories: fast, moderate, and slow sellers. This helped optimize stock levels and reduce costs.</p>
-<p>Together, these studies demonstrate that K-Means clustering helps retailers improve both marketing precision and inventory control by identifying customer patterns and linking them to product demand. For example, clustering results can be used to align promotional strategies with inventory decisions, creating an integrated, data-driven retail management system (<span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="bala2012forecast">Bala (<a href="#ref-bala2012forecast" role="doc-biblioref">2012</a>)</span>; <span class="citation" data-cites="sitorus2023inventory">Sitorus et al. (<a href="#ref-sitorus2023inventory" role="doc-biblioref">2023</a>)</span>).</p>
+<p>K-Means clustering is commonly used in retail to enhance consumer segmentation and inventory forecasting. From 2019-2024, <span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span> found that integrating K-Means with association rule learning, such as FP-Growth, can help merchants better analyze customer behavior and generate targeted marketing strategies. The review demonstrates that K-Means is reliable on big datasets and may be used to classify products based on sales speed, including fast-moving and slow-moving commodities.</p>
+<p><span class="citation" data-cites="omol2024">(<a href="#ref-omol2024" role="doc-biblioref"><strong>omol2024?</strong></a>)</span> Kenya used K-Means clustering to analyze transactional and demographic data from food outlets. Their study found that age and income significantly impact buying behavior. This information can help retailers better manage inventory and target marketing activities.</p>
+<p><span class="citation" data-cites="bala2012forecast">Bala (<a href="#ref-bala2012forecast" role="doc-biblioref">2012</a>)</span> proposed a forecasting approach that combines clustering and demand prediction. This technique enhanced inventory accuracy, decreased extra stock, and minimized shortages, demonstrating how clustering can enhance supply chain efficiency. <span class="citation" data-cites="sitorus2023inventory">Sitorus et al. (<a href="#ref-sitorus2023inventory" role="doc-biblioref">2023</a>)</span> used K-Means to categorize products by demand at a retail store, resulting in three categories: fast, moderate, and slow sellers. This helped to optimize stock levels and lower costs.</p>
+<p>These studies show that K-Means clustering can improve retailers’ marketing precision and inventory control by discovering client trends and correlating them to product demand. Clustering results can help match promotional campaigns with inventory decisions, resulting in a data-driven retail management system (<span class="citation" data-cites="prasetiya2025review">Prasetiya and Prayoga (<a href="#ref-prasetiya2025review" role="doc-biblioref">2025</a>)</span>; <span class="citation" data-cites="omol2024kenya">Omol et al. (<a href="#ref-omol2024kenya" role="doc-biblioref">2024</a>)</span>; <span class="citation" data-cites="bala2012forecast">Bala (<a href="#ref-bala2012forecast" role="doc-biblioref">2012</a>)</span>; <span class="citation" data-cites="sitorus2023inventory">Sitorus et al. (<a href="#ref-sitorus2023inventory" role="doc-biblioref">2023</a>)</span>).</p>
 </section>
 </section>
 <section id="methods" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Methods</h1>
-<p>K-Means is an unsupervised machine learning method used to group similar data points into different clusters. It works by dividing all the data into a specific number of groups (called K) based on how close or similar the values are to each other. Each group has a center point called a centroid, and all the items in that group are close to that center.</p>
-<p>Formally, given a set of n observations x1,x2,…,xn the K-Means algorithm partitions the data into K disjoint clusters C1,C2,…,CK by minimizing the Within-Cluster Sum of Squares (WCSS):</p>
+<p>K-Means is an unsupervised machine learning algorithm that groups related data points into distinct clusters. The algorithm divides data into K groups based on value similarity. Each group has a centroid, where all items are located in the center.</p>
+<p>The K-Means approach separates a set of observations (x1,x2,…,xn) into K distinct clusters (C1,C2,…,CK) by minimizing the Within-Cluster Sum of Squares (WCSS):</p>
 <p><span class="math display">\[
 WCSS = \sum_{k=1}^{K} \sum_{x_i \in C_k} \| x_i - \mu_k \|^2
-\]</span> where uk is the centroid (mean vector) of cluster Ck and ||.|| denotes the Euclidean norm.</p>
-<p>The overall goal is to make each cluster as compact as possible (low variance within clusters) and as distinct as possible from the others (large separation between cluster centers).</p>
-<p>In this project, the K-Means method is used to group items or suppliers based on their performance and sales behavior. The main idea is to find patterns — such as which products sell quickly, moderately, or slowly. By forming these clusters, we can easily understand sales trends and improve inventory or management decisions.</p>
-<p>This helps to:</p>
+\]</span></p>
+<p>where uk is the centroid (mean vector) of cluster Ck and ||.|| denotes the Euclidean norm.</p>
+<p>The goal is to create clusters that are both compact (low variance inside) and distinct (big separation between centers).</p>
+<p>This project use the K-Means method to categorize items or suppliers based on their performance and sales behavior. The primary goal is to identify patterns, such as which things sell quickly, moderately, or slowly. Creating clusters helps us identify sales trends and make better inventory and management decisions.</p>
+<p>This helps with:</p>
 <ul>
-<li><p>Identify fast-moving, moderate-moving, and slow-moving items.</p></li>
-<li><p>Analyze sales patterns and supplier performance.</p></li>
-<li><p>Support better decision-making for planning and restocking.</p></li>
-<li><p>Simplify large data into meaningful, easy-to-understand groups.</p></li>
+<li><p>Determine whether things move quickly, moderately, or slowly.</p></li>
+<li><p>Analyze sales trends and supplier performance.</p></li>
+<li><p>Improve decision-making for planning and replenishing.</p></li>
+<li><p>Break down enormous amounts of data into relevant, understandable groups.</p></li>
 </ul>
-<p>In Simple Terms: This project uses K-Means clustering to automatically divide items or suppliers into groups based on how they behave. It helps to understand trends, improve decisions, and manage inventory more effectively by turning complex data into clear, useful insights.</p>
+<p>In simple terms: This project uses K-Means clustering to automatically categorize commodities or suppliers based on their behavior. Transforming complex data into clear insights enhances understanding of trends, decision-making, and inventory management.</p>
 <section id="determining-the-optimal-number-of-clusters" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="determining-the-optimal-number-of-clusters"><span class="header-section-number">2.1</span> Determining the Optimal Number of Clusters</h2>
-<p>Selecting an appropriate number of clusters 𝐾 is crucial for meaningful segmentation. Three complementary techniques were used:</p>
+<p>Choosing an appropriate number of clusters (𝐾) is critical for effective segmentation. Three complimentary approaches were utilized:</p>
 <ol type="1">
-<li><strong>Elbow Method</strong>: The Within-Cluster Sum of Squares (WCSS) was plotted against increasing values of 𝐾. The point where the rate of improvement sharply declines (“the elbow”) suggests an optimal value.(<span class="citation" data-cites="MacQueen1967">MacQueen (<a href="#ref-MacQueen1967" role="doc-biblioref">1967</a>)</span>)</li>
+<li><strong>Elbow Method</strong>: The Within-Cluster Sum of Squares (WCSS) was compared to increasing values of 𝐾. The optimal value is indicated by a dramatic fall in the pace of improvement (“the elbow”). (<span class="citation" data-cites="MacQueen1967">MacQueen (<a href="#ref-MacQueen1967" role="doc-biblioref">1967</a>)</span>)</li>
 </ol>
 <p><span class="math display">\[
 WCSS = \sum_{k=1}^{K} \sum_{x_i \in C_k} \| x_i - \mu_k \|^2
 \]</span></p>
 <ol start="2" type="1">
-<li><strong>Silhouette Coefficient</strong>: Measures how well each observation fits within its assigned cluster versus neighboring clusters, ranging from -1 (poor) to +1 (well-separated).(<span class="citation" data-cites="Rousseeuw1987">Rousseeuw (<a href="#ref-Rousseeuw1987" role="doc-biblioref">1987</a>)</span>)</li>
+<li><strong>Silhouette Coefficient</strong>: This metric assesses how well each observation fits in its allocated cluster compared to nearby clusters, with values ranging from -1 (poor) to +1 (well-separated). (<span class="citation" data-cites="Rousseeuw1987">Rousseeuw (<a href="#ref-Rousseeuw1987" role="doc-biblioref">1987</a>)</span>)</li>
 </ol>
 <p><span class="math display">\[
 s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}
 \]</span></p>
 <ol start="3" type="1">
-<li><strong>Calinski–Harabasz Index</strong>: The Calinski–Harabasz(CH) index compares between-cluster dispersion with within-cluster dispersion. For 𝐾clusters, a higher CH index indicates better defined clusters.</li>
+<li><strong>Calinski–Harabasz Index</strong>: The Calinski-Harabasz (CH) index compares between and within cluster dispersion. A higher CH index in 𝐾clusters suggests better defined clusters.(<span class="citation" data-cites="Calinski1974">Caliński and Harabasz (<a href="#ref-Calinski1974" role="doc-biblioref">1974</a>)</span>)</li>
 </ol>
-<p>In practice, we evaluated a range of 𝐾 values (e.g., 𝐾=2 to 𝐾=6) and compared:</p>
+<p>We compared 𝐾 values ranging from 2 to 6.</p>
 <ul>
-<li><p>The Elbow plot of WCSS,</p></li>
-<li><p>The average Silhouette scores, and</p></li>
-<li><p>The Calinski–Harabasz scores.</p></li>
+<li><p>The elbow plot of WCSS.</p></li>
+<li><p>The average Silhouette score,</p></li>
+<li><p>The Calinski-Harabasz score.</p></li>
 </ul>
-<p><strong>Practical Interpretation and Final Choice</strong> Both the Elbow and Silhouette analyses suggested that 𝐾=3 provides a good balance between model complexity and cluster separation. In addition, 𝐾=3 is managerially meaningful, aligning with the conventional classification of inventory into:</p>
+<p><strong>Practical Interpretation and Final Choice</strong> The Elbow and Silhouette analyses indicated that 𝐾=3 strikes a fair balance between model complexity and cluster separation. Furthermore, 𝐾=3 is relevant for managers as it aligns with the traditional inventory classification system.</p>
 <ul>
-<li><p>Fast-moving items,</p></li>
-<li><p>Moderate-moving items, and</p></li>
-<li><p>Slow-moving items.</p></li>
+<li><p>Fast moving items,</p></li>
+<li><p>Moderately moving items,</p></li>
+<li><p>Slow-moving items</p></li>
 </ul>
-<p>Therefore, 𝐾=3 was chosen as the optimal number of clusters for this study.</p>
+<p>The ideal number of clusters for this investigation was determined to be 𝐾 = 3.</p>
 </section>
 <section id="k-means-clustering-process" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="k-means-clustering-process"><span class="header-section-number">2.2</span> K-Means Clustering Process</h2>
-<p>Once =3 was selected, the K-Means algorithm was applied to the standardized feature space (TOTAL_SALES,RETAIL SALES,WAREHOUSE SALES).</p>
-<p>The main algorithmic steps(<span class="citation" data-cites="Lloyd1982">Lloyd (<a href="#ref-Lloyd1982" role="doc-biblioref">1982</a>)</span>) are:</p>
+<p>After selecting =3, the K-Means technique was used to analyze the standardized feature space (TOTAL_SALES, RETAIL SALES, WAREHOUSE SALES).</p>
+<p>The main algorithmic steps (<span class="citation" data-cites="Lloyd1982">Lloyd (<a href="#ref-Lloyd1982" role="doc-biblioref">1982</a>)</span>) are:</p>
 <p>1.<strong>Initialization:</strong></p>
 <ul>
-<li><p>Randomly initialize 𝐾 =3 centroids in the feature space, or</p></li>
-<li><p>Use a smarter method such as K-Means++ initialization to improve starting positions.</p></li>
+<li><p>Randomly set 𝐾 = 3 centroids in the feature space, or</p></li>
+<li><p>Use K-Means initialization for better beginning positions.</p></li>
 </ul>
 <p>2.<strong>Assignment step:</strong> For each item (x_i), compute the Euclidean distance to each centroid (u_k):</p>
 <p><span class="math display">\[
@@ -3404,24 +3406,24 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 \]</span></p>
 <p>4.<strong>Convergence:</strong></p>
 <ul>
-<li>Repeat the assignment and update steps until the centroids stabilize (i.e., changes fall below a chosen threshold) or a maximum number of iterations is reached. In our experiments, convergence typically occurred within a small number of iterations.</li>
+<li>Repeat the assignment and update stages until the centroids stabilize (changes below a specified threshold) or the maximum number of iterations is reached. Our investigations showed that convergence often happened after a few repetitions.</li>
 </ul>
 </section>
 <section id="cluster-validation-and-profiling" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="cluster-validation-and-profiling"><span class="header-section-number">2.3</span> Cluster Validation and Profiling</h2>
-<p>After fitting the K-Means model, cluster quality was assessed using:</p>
+<p>After fitting the K-Means model, the cluster quality was evaluated using:</p>
 <ul>
-<li><p>The average Silhouette score, to gauge cohesion and separation;</p></li>
-<li><p>The Calinski–Harabasz index, to compare between-cluster vs. within-cluster variance.</p></li>
+<li><p>The average Silhouette score, which measures coherence and separation;</p></li>
+<li><p>The Calinski-Harabasz index compares variation between and within clusters.</p></li>
 </ul>
-<p>While these indices provide quantitative validation, clusters were also profiled qualitatively to link them to business concepts. For each cluster, we examined:</p>
+<p>The indices give quantitative validation, but clusters were also profiled qualitatively to connect them to commercial principles. For each cluster, we analyzed:</p>
 <ul>
-<li><p>Mean and median of TOTAL_SALES, RETAIL SALES, and WAREHOUSE SALES;</p></li>
-<li><p>Distribution of item types (beer, wine, liquor, kegs, non-alcoholic);</p></li>
-<li><p>Contribution of major suppliers;</p></li>
-<li><p>Temporal patterns using monthly summaries.</p></li>
+<li><p>The average and median of total sales, retail sales, and warehouse sales;</p></li>
+<li><p>Distribution of item types, including beer, wine, liquor, kegs, and non-alcoholic beverages.</p></li>
+<li><p>The contribution of major suppliers</p></li>
+<li><p>Using monthly summary to identify temporal patterns.</p></li>
 </ul>
-<p>Clusters were then labeled as Fast-Moving, Moderate-Moving, or Slow-Moving based on these profiles.</p>
+<p>Clusters were classified as Fast, Moderate, or Slow-Moving based on their profiles.</p>
 </section>
 </section>
 <section id="analysis-and-results" class="level1" data-number="3">
@@ -3429,20 +3431,20 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 <section id="data-exploration-and-visualization" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="data-exploration-and-visualization"><span class="header-section-number">3.1</span> Data Exploration and Visualization</h2>
 <p><strong>Data Sources and Collection:</strong></p>
-<p>The Montgomery County Maryland Open Data Portal(<span class="citation" data-cites="MontgomeryCountyWarehouseRetail2025">Montgomery County, Maryland, Government (<a href="#ref-MontgomeryCountyWarehouseRetail2025" role="doc-biblioref">2025</a>)</span>) provided the dataset used in the present study.</p>
-<p>It includes comprehensive monthly records of alcohol sales from 2017 to 2020 that were gathered by the Department of Liquor Control from both retail locations and warehouse operations. Every record contains details regarding:</p>
+<p>The Montgomery County Maryland Open Data Portal (<span class="citation" data-cites="MontgomeryCountyWarehouseRetail2025">Montgomery County, Maryland, Government (<a href="#ref-MontgomeryCountyWarehouseRetail2025" role="doc-biblioref">2025</a>)</span>) provided the dataset for this investigation.</p>
+<p>The Department of Liquor Control collected complete monthly statistics on alcohol sales from 2017 to 2020 from retail and warehouse locations. Each record includes information regarding:</p>
 <ul>
 <li><p>Supplier name (vendor providing the product)</p></li>
 <li><p>item kind (beer, wine, spirits, etc.) and item code</p></li>
 <li><p>Retail sales, retail transfers, and warehouse sales are a few such sales channels.</p></li>
 <li><p>Temporal features: month and year</p></li>
 </ul>
-<p>The dataset is updated regularly and published under a Public Domain License, supporting transparency in local government operations and enabling reproducible business analytics research.</p>
+<p>The dataset is constantly updated and released under a Public Domain License, promoting transparency in local government processes and facilitating replicable business analytics research.</p>
 </section>
 <section id="exploratory-analysis" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="exploratory-analysis"><span class="header-section-number">3.2</span> Exploratory Analysis</h2>
-<p>Before applying K-Means, the dataset was cleaned and summarized to examine overall sales trends, supplier performance, and product movement. Using RStudio and packages such as tidyverse, ggplot2, and lubridate, we computed descriptive statistics and generated exploratory visualizations.</p>
-<p>Example snippet of the cleaned data (aggregated at the item level) includes variables like:</p>
+<p>Before using K-Means, the dataset was cleaned and summarized to analyze sales trends, supplier performance, and product movement. Using RStudio and tools like tidyverse, ggplot2, and lubridate, we created descriptive statistics and exploratory visualizations.</p>
+<p>An example of cleansed data, aggregated at the item level, includes variables such as:</p>
 <ul>
 <li><p>YEAR, MONTH</p></li>
 <li><p>SUPPLIER, ITEM CODE, ITEM DESCRIPTION, ITEM TYPE</p></li>
@@ -3467,7 +3469,7 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Read Excel file (update the file path if needed)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Retail_Sales.xlsx&quot;</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
@@ -3499,6 +3501,7 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date =</span> <span class="fu">make_date</span>(YEAR, MONTH, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p><strong>Total Sales Trend Over Time</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3543,7 +3546,8 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p><strong>Insights:</strong> This visualization shows the daily total sales trend over time. It highlights how sales fluctuate from day to day, revealing patterns such as peaks during high-demand periods and drops during slower days. The trend line helps identify overall performance changes and potential seasonal variations in sales.</p>
+<p><strong>Insights:</strong> This image depicts the daily total sales trend over time. It shows daily sales fluctuations, including peaks during high demand and dips during slack days. The trend line identifies overall performance changes and seasonal differences in sales.</p>
+<p><strong>Top 10 Suppliers by Total Sales</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3571,7 +3575,8 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p><strong>Insights:</strong>A few suppliers control the majority of total revenue, according to the sales analysis. - With the greatest sales, Crown Imports, Miller Brewing Company, and Anheuser Busch Inc. demonstrate a concentrated supplier base where major vendors control the majority of the market. For these major contributors, this pattern emphasizes the significance of keeping solid supplier relationships and precise demand forecasting.</p>
+<p><strong>Insights:</strong>Sales analysis shows that a small number of suppliers account for the majority of total income. Crown Imports, Miller Brewing Company, and Anheuser Busch Inc. have the highest sales, indicating a concentrated supply base where major vendors own the majority of the market. Maintaining strong supplier connections and accurate demand forecasting is crucial for these significant contributors.</p>
+<p><strong>Sales by Item Type</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3592,10 +3597,11 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p><strong>Insights:</strong>Beer dominates the retail industry, with sales close to $8 million, greatly outpacing all other categories, according to the sales distribution across item kinds. Liquor and Wine occupy the second and third spots, reflecting moderate but sustained demand. The fact that categories like dunnage, kegs, and non-alcoholic items make up very little of the overall revenue highlights the fact that alcoholic beverages are the main driver of the county’s retail sector.</p>
+<p><strong>Insights:</strong>Beer dominates the retail market, accounting for about $8 million in sales and exceeding all other categories based on item distribution. Liquor and wine fall into second and third, indicating moderate but continuous demand. Alcoholic beverages dominate the county’s retail industry, with dunnage, kegs, and non-alcoholic items accounting for only a small portion of total income.</p>
 <ul>
-<li>Beer’s dominance suggests a fast-moving inventory sector due to frequent use and high brand loyalty. However, goods classified as “Kegs” and “Non-Alcoholic” move slowly and would need focused marketing techniques to boost sales.</li>
+<li>Beer’s dominance indicates a fast-moving inventory sector due to regular use and strong brand loyalty. Goods classified as “Kegs” and “Non-Alcoholic” move slowly and require targeted marketing to increase sales.</li>
 </ul>
+<p><strong>Comparison: Retail vs Warehouse Sales</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3623,7 +3629,8 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p><strong>Insights:</strong>Warehouse sales are almost three times greater than retail sales, according to the analysis. This implies that rather than being sold directly to customers, the majority of merchandise is transferred in large quantities via centralized distribution. Although this type of layout promotes productivity, careful inventory balancing is necessary to prevent overstocking.</p>
+<p><strong>Insights:</strong> Warehouse sales are nearly three times higher than retail sales, according to the data. Merchandise is typically distributed in bulk through centralized channels rather than being sold directly to clients. While this structure increases productivity, it requires careful inventory balance to avoid overstocking.</p>
+<p><strong>Monthly Sales Heatmap</strong></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3648,36 +3655,36 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p><strong>Insights:</strong>Due to seasonal and holiday demand spikes, sales activity peaks between December and the middle of the year. Early months see lower sales, while anomalies in 2020 point to potential outside interruptions such as the COVID-19 pandemic. Planning stock levels around seasonal trends is made easier by identifying these patterns.</p>
+<p><strong>Insights:</strong>Sales activity often peaks between December and the middle of the year, driven by seasonal and holiday demand. Early months show reduced sales, while anomalies in 2020 indicate potential external interruptions such the COVID-19 pandemic. Identifying seasonal changes helps plan stock levels more effectively.</p>
 </section>
 <section id="visualization-based-evidence" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="visualization-based-evidence"><span class="header-section-number">3.3</span> Visualization-Based Evidence</h2>
-<p>1.<strong>Top Suppliers by Total Sales:</strong>A bar chart of total sales by supplier showed that companies such as Crown Imports, Miller Brewing Company, and Anheuser Busch Inc. account for a large share of overall revenue. Many of their key products fall into Cluster 1 (Fast-Moving), which is consistent with the very high total sales and strong warehouse movement observed in that cluster. In contrast, smaller suppliers tend to have more products in Cluster 2 (Slow-Moving) or Cluster 3 (Moderate-Moving).</p>
-<p>2.<strong>Total Sales by Item Type:</strong>The visualization of total sales by item type showed that beer dominates total sales, followed by liquor and wine. Fast-moving items in Cluster 1 are heavily concentrated in high-volume categories like beer and popular liquor brands. Cluster 3 (Moderate-Moving) contains many wine and mid-tier products with steady but lower sales. Categories such as kegs, dunnage, and non-alcoholic items are more frequently found in Cluster 2 (Slow-Moving), reflecting their low or irregular turnover.</p>
-<p>3.<strong>Retail vs Warehouse Sales:</strong> When comparing total retail and warehouse sales, we see that warehouse sales (~$7.8M) are much larger than retail sales (~$2.1M). Items in Cluster 1 (Fast-Moving) tend to have high warehouse sales and noticeable retail movement, indicating that these products are stocked in bulk to meet continuous demand. Items in Cluster 3 (Moderate-Moving) show mid-level warehouse and retail sales. Many items in Cluster 2 (Slow-Moving) have low values in both channels and appear only occasionally in sales records.</p>
-<p>4.<strong>Heatmap of Monthly Sales:</strong> A monthly heatmap of sales activity shows that fast-moving items (Cluster 1) have strong seasonal peaks, especially in summer and December, but also maintain significant baseline sales throughout the year. Moderate-moving items (Cluster 3) show smoother, stable patterns across months. Slow-moving items (Cluster 2) exhibit many months with very low or zero sales, with only occasional spikes. The irregular behavior in 2020 suggests potential external influences such as COVID-19.</p>
-<p>Together, these visual patterns align well with the numeric cluster profiles and strengthen the interpretation of Clusters 1, 2, and 3 as fast, slow, and moderate moving groups.</p>
+<p>1.<strong>Top Suppliers by Total Sales:</strong>A bar chart of total sales by source revealed that Crown Imports, Miller Brewing Company, and Anheuser Busch Inc. dominate revenue. The company’s primary items are concentrated in Cluster 1 (Fast-Moving), resulting in high overall sales and strong warehouse movement. Smaller suppliers typically have more products in Clusters 2 (slow-moving) or 3 (moderate-moving).</p>
+<p>2.<strong>Total Sales by Item Type:</strong>Beer is the most popular item in overall sales, followed by spirits and wine. Cluster 1 has a significant concentration of fast-moving products, particularly in high-volume categories such as beer and liquor. Cluster 3 (Moderate-Moving) features wine and mid-tier products with consistent but lower sales. Kegs, dunnage, and non-alcoholic commodities fall under Cluster 2 (Slow-Moving) due to their slow or irregular turnover.</p>
+<p>3.<strong>Retail vs Warehouse Sales:</strong> Warehouse sales ($7.8M) are significantly higher than retail sales ($2.1M). Cluster 1 (Fast-Moving) items have substantial warehouse sales and retail movement, indicating they are stored in bulk to meet ongoing demand. Items in Cluster 3 (Moderate-Moving) represent mid-level warehouse and retail sales. Cluster 2 (Slow-Moving) goods have low values in both channels and are rarely recorded in sales statistics.</p>
+<p>4.<strong>Heatmap of Monthly Sales:</strong> A monthly heatmap of sales activity indicates that fast-moving items (Cluster 1) experience seasonal peaks, particularly in summer and December, but still have large baseline sales throughout the year. Moderate-moving goods (Cluster 3) exhibit consistent patterns throughout months. Slow-moving products (Cluster 2) often have minimal or no sales, with rare increases. COVID-19 may have contributed to the unpredictable behavior in 2020.</p>
+<p>These visual patterns complement the mathematical cluster profiles and support the classification of Clusters 1, 2, and 3 as fast, slow, and moderate moving groups.</p>
 </section>
 </section>
 <section id="modeling-and-results" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Modeling and Results</h1>
 <section id="modeling-and-data-preparation" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="modeling-and-data-preparation"><span class="header-section-number">4.1</span> Modeling and Data Preparation</h2>
-<p>Before building the K-Means model, the dataset was prepared to ensure that all items were represented accurately and consistently. Duplicate records were removed, missing values were handled, and sales from the three channels—retail, warehouse, and retail transfers—were combined into a single TOTAL_SALES measure to capture complete item performance. These cleaned and consolidated variables formed the foundation for clustering.</p>
-<p>To select the appropriate number of clusters, both the Elbow Method and Silhouette Method were applied. Both techniques consistently indicated K = 3, which aligns with common retail inventory categories—Fast-Moving, Moderate-Moving, and Slow-Moving items. With this choice of K, the dataset was ready for clustering using standardized sales variables.</p>
+<p>To develop the K-Means model, the dataset was prepared to ensure accurate and consistent item representation. Duplicate records were deleted, missing values were addressed, and sales from three channels (retail, warehouse, and retail transfers) were integrated into a single TOTAL_SALES metric to accurately reflect item performance. These cleansed and condensed variables laid the groundwork for clustering.</p>
+<p>The Elbow and Silhouette Methods were used to determine the optimal number of clusters. Both methodologies consistently showed K = 3, which corresponds to standard retail inventory classifications (Fast-Moving, Moderate-Moving, and Slow-Moving). Using K, the dataset was ready for clustering based on standardized sales variables.</p>
 </section>
 <section id="data-preprocessing" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="data-preprocessing"><span class="header-section-number">4.2</span> Data Preprocessing</h2>
-<p>The raw Montgomery County retail dataset contained monthly-level sales records for each supplier, item, and sales channel. To make the data usable for K-Means, several preprocessing steps were carried out:</p>
+<p>The Montgomery County retail dataset included monthly sales records for all suppliers, items, and sales channels. To prepare the data for K-Means, multiple preprocessing processes were performed:</p>
 <ul>
-<li><p><strong>Aggregation</strong>: Monthly records were aggregated to create one row per supplier–item combination, summing Retail Sales, Retail Transfers, and Warehouse Sales.</p></li>
-<li><p><strong>Feature Creation</strong>: A new TOTAL_SALES variable was generated to represent complete sales activity.</p></li>
-<li><p><strong>Missing Values</strong>: Missing numeric sales values were replaced with zeros where appropriate.</p></li>
-<li><p><strong>Deduplication</strong>: Duplicate entries were removed to avoid inflating certain items.</p></li>
-<li><p><strong>Filtering</strong>: Items with no sales activity were excluded from modeling.</p></li>
-<li><p><strong>Standardization</strong>: The numeric variables used for clustering—TOTAL_SALES, RETAIL_SALES, and WAREHOUSE_SALES—were standardized so that differences in scale did not affect distance calculations.</p></li>
+<li><p><strong>Aggregation</strong>: Monthly records were combined into one row per supplier-item combination, including Retail Sales, Retail Transfers, and Warehouse Sales.</p></li>
+<li><p><strong>Feature Creation</strong>: A new variable, TOTAL_SALES, was created to reflect all sales activity.</p></li>
+<li><p><strong>Missing Values</strong>: Missing numeric sales values were substituted with zeros when applicable.</p></li>
+<li><p><strong>Reduplication</strong>: Duplicate entries have been removed to prevent excess specific items.</p></li>
+<li><p><strong>Filtering</strong>: Items with no sales activity were removed from modeling.</p></li>
+<li><p><strong>Standardization</strong>: Clustering variables (TOTAL_SALES, RETAIL_SALES, and WAREHOUSE_SALES) were normalized to prevent scale gaps from affecting distance calculations.</p></li>
 </ul>
-<p>These preprocessing steps ensured that the final dataset was clean, consolidated, and suitable for meaningful cluster formation.</p>
+<p>The preparation methods ensured a clean, consolidated dataset suited for cluster creation.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3716,7 +3723,7 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </section>
 <section id="elbow-method-code" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="elbow-method-code"><span class="header-section-number">4.3</span> Elbow Method Code</h2>
-<p>The Elbow Method was used to evaluate different values of 𝐾 by calculating the Within-Cluster Sum of Squares (WCSS) for 𝐾=2 through 𝐾=8. The Elbow plot shows how much WCSS decreases as the number of clusters increases. A sharp drop is usually followed by a flattening of the curve—this “elbow” indicates a good balance between simplicity and accuracy.</p>
+<p>The Elbow Method was used to calculate the Within-Cluster Sum of Squares (WCSS) for 𝐾 values ranging from 2 to 8. The Elbow plot illustrates how WCSS reduces with more clusters. A sharp drop followed by a flattening of the curve, known as a “elbow,” shows a strong balance of simplicity and precision.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3751,12 +3758,12 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p>The WCSS curve showed a clear bend at 𝐾=3. Beyond three clusters, the reduction in WCSS became minimal, suggesting that additional clusters would not significantly improve separation. This result supports choosing three clusters as an appropriate and efficient segmentation of the retail items.</p>
-<p>Thus, based on WCSS patterns, 𝐾=3 provides a meaningful structure with minimal unnecessary complexity.</p>
+<p>The WCSS curve exhibited a clear bend at 𝐾=3. Beyond three clusters, the drop in WCSS was small, indicating that adding more clusters would not considerably enhance separation. The results suggest that segmenting retail items into three clusters is an effective and efficient approach.</p>
+<p>Using WCSS patterns, 𝐾=3 creates a meaningful structure with minimal unneeded complexity.</p>
 </section>
 <section id="silhouette-method" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="silhouette-method"><span class="header-section-number">4.4</span> Silhouette Method</h2>
-<p>To validate the Elbow Method, a Silhouette analysis was performed for 𝐾=3. The Silhouette score measures how close each item is to its own cluster compared to other clusters. Values close to +1 indicate strong cohesion within clusters and clear separation between them.</p>
+<p>To validate the Elbow Method, a Silhouette analysis was performed for 𝐾 = 3. The Silhouette score assesses how closely each item aligns with its own cluster compared to others. Clusters with values near +1 show strong cohesiveness and distinct separation.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3796,12 +3803,12 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 </div>
 </div>
-<p>The overall average Silhouette score was approximately 0.97, which indicates excellent clustering performance. Cluster 2 had a Silhouette width of 0.98, showing extremely tight grouping and strong separation — consistent with its large count of low-sales items. Clusters 1 and 3 had lower Silhouette values (0.19 and 0.09), which is expected for smaller high-value and mid-value groups that lie further away from the large slow-moving cluster.</p>
-<p>The very high overall Silhouette score confirms that 𝐾=3 forms well-separated and meaningful clusters.</p>
+<p>The average Silhouette score was 0.97, indicating outstanding clustering performance. Cluster 2 had a Silhouette width of 0.98, indicating tight grouping and significant separation, perhaps due to its high number of low-sales goods. Clusters 1 and 3 had lower Silhouette values (0.19 and 0.09), consistent with smaller high-value and mid-value groups located further away from the main slow-moving cluster.</p>
+<p>The high overall Silhouette score indicates that 𝐾=3 creates well-defined and meaningful clusters.</p>
 </section>
 <section id="cluster-profilingsizes-centroids-summary" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="cluster-profilingsizes-centroids-summary"><span class="header-section-number">4.5</span> Cluster Profiling(Sizes + Centroids + Summary)</h2>
-<p>Once clustering was completed, the characteristics of each cluster were examined using the cluster sizes, centroid values (scaled units), and summary statistics (original units). This profiling step helps translate numerical cluster assignments into meaningful business categories.</p>
+<p>After clustering, the features of each cluster were analyzed using their sizes, centroid values (scaled units), and summary statistics (original units). This profiling stage translates numerical cluster assignments into relevant business categories.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -3960,11 +3967,11 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </div>
 <p>The centroids and averages revealed that:</p>
 <ul>
-<li><p>Cluster 1 has the highest total sales (≈139,000 on average), making it the Fast-Moving cluster.</p></li>
-<li><p>Cluster 2 has very low total sales (≈155), representing Slow-Moving items.</p></li>
-<li><p>Cluster 3 shows moderate total sales (≈16,695), identifying it as the Moderate-Moving cluster.</p></li>
+<li><p>Cluster 1 has the most overall sales (about 139,000 on average), making it the Fastest Moving cluster.</p></li>
+<li><p>Cluster 2 has low total sales (about 155), indicating slow moving products.</p></li>
+<li><p>Cluster 3 has moderate overall sales (about 16,695), making it the Moderate-Moving cluster.</p></li>
 </ul>
-<p>This three-group structure matches typical inventory movement patterns in retail and aligns with managerial frameworks for stock classification. The profiling confirms that K-Means successfully distinguished high-demand items from mid-level and slow-moving products.</p>
+<p>This three-group structure aligns with common retail inventory movement patterns and managerial stock classification frameworks. K-Means accurately identified high-demand items from mid-level and slow-moving products, as confirmed by the profile.</p>
 </section>
 <section id="cluster-visualization-scatter-plot" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="cluster-visualization-scatter-plot"><span class="header-section-number">4.6</span> Cluster Visualization: Scatter Plot</h2>
@@ -4016,42 +4023,42 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 </section>
 <section id="cluster-formation-and-categorization" class="level2" data-number="4.7">
 <h2 data-number="4.7" class="anchored" data-anchor-id="cluster-formation-and-categorization"><span class="header-section-number">4.7</span> Cluster Formation and Categorization</h2>
-<p>After running K-Means with 𝐾=3, the items in the dataset were divided into three distinct clusters based on their Total Sales, Retail Sales, and Warehouse Sales values.</p>
+<p>Using K-Means with 𝐾=3, the dataset was separated into three clusters based on Total Sales, Retail Sales, and Warehouse Sales.</p>
 <p>Using the cluster summary results:</p>
 <ul>
-<li><p>Cluster 1 has only 17 items, but an average total sales of about 138,991, with very high warehouse sales.</p></li>
-<li><p>Cluster 2 has 37,667 items, but a very low average total sales of about 155, and low retail and warehouse sales.</p></li>
-<li><p>Cluster 3 has 240 items, with an average total sales of around 16,695, and moderate warehouse and retail values.</p></li>
+<li><p>Cluster 1 has only 17 goods yet generates an average total sales of 138,991, including significant warehouse sales.</p></li>
+<li><p>Cluster 2 has 37,667 products, but has a low average total sales of 155, as well as low retail and warehouse sales.</p></li>
+<li><p>Cluster 3 comprises 240 items, with an average total sales of approximately 16,695, and intermediate warehouse and retail values.</p></li>
 </ul>
 <p>Based on these patterns, the clusters were interpreted as:</p>
 <ul>
-<li><p>Cluster 1 – Fast-Moving Items Items in this cluster have extremely high total and warehouse sales. They represent a small set of “core” products that sell in large volumes and are critical for revenue. These are high-demand items that require frequent replenishment and careful monitoring to avoid stock-outs.</p></li>
-<li><p>Cluster 2 – Slow-Moving Items This cluster contains the majority of items, but with very low total sales on average. Many of these products have limited or irregular demand, and some may be niche, specialty, or rarely purchased items. They have low retail and warehouse movement compared to the other clusters.</p></li>
-<li><p>Cluster 3 – Moderate-Moving Items Items in this cluster occupy the middle ground. Their total sales are much higher than slow movers but lower than the fast movers in Cluster 1. They show relatively steady and predictable performance over time. These products are often wines and mid-tier spirits that generate regular but not extreme turnover.</p></li>
+<li><p>Cluster 1 – Fast-moving items This cluster contains items with high total and warehouse sales. These are the “core” products that generate significant revenue due to their high volume sales. High-demand items require frequent restocking and close monitoring to prevent stock-outs.</p></li>
+<li><p>Cluster 2 – Slow Moving Items This cluster includes the bulk of goods yet has low average sales. Some of these products have limited or irregular demand, and may be considered niche, specialist, or infrequently purchased. They feature lower retail and warehousing activity compared to other clusters.</p></li>
+<li><p>Cluster 3 – Moderately Moving Items This cluster includes items that fall somewhere in the middle. Their sales are significantly greater than slow movers, but lower than quick movers in Cluster 1. They demonstrate consistent and predictable performance throughout time. These products are typically wines and mid-tier spirits with a consistent but not high turnover.</p></li>
 </ul>
-<p>This structure matches the typical inventory classification into fast-, moderate-, and slow-moving items and confirms that K-Means is capturing meaningful differences in sales behavior.</p>
+<p>This structure aligns with the conventional inventory classification of rapid, moderate, and slow-moving products, indicating that K-Means accurately reflects sales behavior.</p>
 </section>
 <section id="cluster-insights" class="level2" data-number="4.8">
 <h2 data-number="4.8" class="anchored" data-anchor-id="cluster-insights"><span class="header-section-number">4.8</span> Cluster Insights</h2>
-<p><strong>Fast-Moving Items (Cluster 1)</strong> Fast-moving items are a small group of products with extremely high total and warehouse sales. These include major beer brands and top liquor products supplied by key vendors like Crown Imports and Miller Brewing. Because they generate a large portion of total revenue, they must be managed carefully:</p>
+<p><strong>Fast-Moving Items (Cluster 1)</strong> Fast-moving items are a small group of products that generate high total and warehouse sales. Key vendors such as Crown Imports and Miller Brewing supply major beer brands and high-quality liquor. Effective management of these sources is crucial since they contribute significantly to overall revenue.</p>
 <ul>
-<li><p>They require frequent replenishment to prevent stock-outs.</p></li>
-<li><p>Forecasting errors can have a big impact on customer satisfaction and sales.</p></li>
-<li><p>These items should receive priority in storage, shelf space, and monitoring.</p></li>
+<li><p>To avoid stockouts, they require constant replenishing.</p></li>
+<li><p>Forecasting inaccuracies can significantly effect customer satisfaction and revenue.</p></li>
+<li><p>These products should be prioritized in storage, shelf space, and monitoring.</p></li>
 </ul>
-<p><strong>Slow-Moving Items (Cluster 2)</strong> Slow-moving items form the largest cluster, but each item sells in small quantities. Many products in this group are niche, seasonal, or low-demand items, including some kegs and non-alcoholic products:</p>
+<p><strong>Slow-Moving Items (Cluster 2)</strong> Slow-moving products comprise the largest cluster, although each sells in limited quantities. This category includes specialty, seasonal, or low-demand products, such as kegs and non-alcoholic beverages.</p>
 <ul>
-<li><p>They are at higher risk of overstocking and inventory holding costs.</p></li>
-<li><p>Managers may consider reducing order quantities, reviewing assortment, or using promotions and discounts to move slow stock.</p></li>
-<li><p>Long-term slow movers may be candidates for discontinuation if they do not support strategic goals.</p></li>
+<li><p>They have a larger risk of overstocking and inventory holding costs.</p></li>
+<li><p>Managers can consider lowering order numbers, revising assortment, or offering promotions and discounts to move slow stock.</p></li>
+<li><p>Long-term slow movers may be discontinued if they do not align with strategic aims.</p></li>
 </ul>
-<p><strong>Moderate-Moving Items (Cluster 3)</strong> Moderate-moving items sit between the other two clusters. They have mid-range total sales and stable, predictable demand. Many wines and mid-tier spirits fall into this category:</p>
+<p><strong>Moderate-Moving Items (Cluster 3)</strong> Moderate-moving objects fall between the other two groupings. They have average total sales and consistent, predictable demand. This category includes many mid-tier wines and spirits.</p>
 <ul>
-<li><p>They provide steady revenue and are important for assortment breadth.</p></li>
-<li><p>They benefit from balanced safety stock—not as aggressive as fast movers, but also not as restricted as slow movers.</p></li>
-<li><p>Regular performance reviews can help decide whether some items should be promoted into a more active category or reduced if demand declines.</p></li>
+<li><p>They generate consistent revenue and contribute to a diverse product offering.</p></li>
+<li><p>They benefit from a well-balanced safety stock, which is neither too aggressive nor too restrictive.</p></li>
+<li><p>Regular performance reviews can determine whether goods should be promoted to more active categories or reduced if demand decreases.</p></li>
 </ul>
-<p>Overall, the three clusters give a clear structure to the product portfolio. Managers can focus their attention where it matters most: protecting availability for fast-moving items, keeping moderate items stable, and controlling costs for slow-moving items.</p>
+<p>Overall, The three clusters provide a clear structure for the product portfolio. Managers might prioritize protecting the supply of fast-moving commodities, stabilizing moderate items, and reducing costs for slow-moving items.</p>
 </section>
 </section>
 <section id="conclusion" class="level1" data-number="5">
@@ -4059,11 +4066,11 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 <section id="key-findings" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="key-findings"><span class="header-section-number">5.1</span> Key Findings</h2>
 <ul>
-<li><p>The K-Means clustering divided the products into three clear groups — Fast-Moving, Moderate-Moving, and Slow-Moving items.</p></li>
-<li><p>Fast-Moving items, like beer and popular liquor brands from suppliers such as Crown Imports and Miller Brewing, had very high and steady sales. These products need to be restocked often.</p></li>
-<li><p>Moderate-Moving items, such as wine, showed average and regular sales. They are stable products that need balanced inventory levels.</p></li>
-<li><p>Slow-Moving items had low or irregular sales, mostly niche or seasonal goods. These products need careful monitoring to avoid overstock and storage costs.</p></li>
-<li><p>Sales increased during holiday seasons like summer and December, showing that demand changes with time and events.</p></li>
+<li><p>K-Means clustering classified products into three categories: Fast-Moving, Moderate-Moving, and Slow-Moving items.</p></li>
+<li><p>Beer and liquor brands from vendors like Crown Imports and Miller Brewing had high and consistent sales. These goods must be supplied often.</p></li>
+<li><p>Moderate-moving commodities, like wine, had average and consistent sales. They are stable products that require balanced inventories.</p></li>
+<li><p>Slow-moving items were typically niche or seasonal, with low or inconsistent sales. To prevent overstocking and storage expenses, these products must be carefully monitored.</p></li>
+<li><p>Sales increased during holiday seasons (e.g., summer and December), indicating that demand varies with time and events.</p></li>
 </ul>
 </section>
 <section id="results-summary" class="level2" data-number="5.2">
@@ -4075,7 +4082,19 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 <li><p>Maintain enough stock of moderate-selling items, and</p></li>
 <li><p>Reduce extra inventory of slow-selling items.</p></li>
 </ul>
-<p>Using K-Means clustering for inventory helps stores plan better, avoid waste, and respond quickly to customer demand. Overall, it supports smarter inventory control, better forecasting, and more efficient retail operations.</p>
+<p>K-Means clustering improves inventory planning, reduces waste, and enables quick response to client demand. Overall, it improves inventory control, forecasting, and retail efficiency.</p>
+</section>
+<section id="limitations-and-future-work" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="limitations-and-future-work"><span class="header-section-number">5.3</span> Limitations and Future Work</h2>
+<p><strong>Limitations</strong></p>
+<p><strong>Cluster Size Imbalance:</strong>One drawback is that Cluster 2 is significantly larger than Clusters 1 and 3. This reflects the fact that most retail items move slowly, but it also indicates that the clustering structure is severely uneven. This could affect how well the smaller high-value clusters are represented.</p>
+<p><strong>K-Means Assumptions:</strong>K-Means assumes spherical, uniformly sized clusters and is sensitive to initial centroid location and outliers. Given the skewed distribution of retail sales data, these assumptions may not always be valid.</p>
+<p><strong>Limited Feature Set:</strong>The analysis only considers sales-related factors (total sales, retail sales, and warehouse sales). Important business parameters, such as profit margin, price elasticity, promotional activity, consumer demographics, and item lifetime, were not considered and could have an impact on cluster formation.</p>
+<p><strong>Future Work</strong></p>
+<p><strong>Test Alternative Clustering Algorithms:</strong>Investigate models that can handle skewed and imbalanced data, such as DBSCAN, Gaussian Mixture Models, and hierarchical clustering, to see if a more balanced segmentation emerges.</p>
+<p><strong>Add more business features:</strong>Use margin, profitability, seasonality indications, promotions, or RFM-style customer KPIs to create clusters that reflect both sales volume and business value.</p>
+<p><strong>Try Weighted or Hybrid models:</strong>Consider weighted K-Means, MiniBatch K-Means, or hybrid models to reduce sensitivity to extreme values and improve resilience.</p>
+<p><strong>Extend to customer-level clustering:</strong>Using the same dataset, cluster consumer behavior (frequency, recency, spend, brand loyalty) to supplement product-level segmentation.</p>
 
 </section>
 </section>
@@ -4083,6 +4102,9 @@ d(x_i, \mu_k) = \| x_i - \mu_k \|_2
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-bala2012forecast" class="csl-entry" role="listitem">
 Bala, Pradip Kumar. 2012. <span>“Improving Inventory Performance with Clustering-Based Demand Forecasts.”</span> <em>Decision Tree-Based Demand Forecasts for Improving Inventory Performance</em>. <a href="https://www.researchgate.net/publication/261023207_Decision_tree_based_demand_forecasts_for_improving_inventory_performance">https://www.researchgate.net/publication/261023207_Decision_tree_based_demand_forecasts_for_improving_inventory_performance</a>.
+</div>
+<div id="ref-Calinski1974" class="csl-entry" role="listitem">
+Caliński, T., and J. Harabasz. 1974. <span>“A Dendrite Method for Cluster Analysis.”</span> <em>Communications in Statistics</em> 3 (1): 1–27. <a href="https://doi.org/10.1007/BF02291575">https://doi.org/10.1007/BF02291575</a>.
 </div>
 <div id="ref-Lloyd1982" class="csl-entry" role="listitem">
 Lloyd, S. 1982. <span>“Least Squares Quantization in PCM.”</span> <em>IEEE Transactions on Information Theory</em> 28 (2): 129–37. <a href="https://doi.org/10.1109/TIT.1982.1056489">https://doi.org/10.1109/TIT.1982.1056489</a>.
